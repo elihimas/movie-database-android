@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config>
+        <target>android-29</target>
+      </config>
+    </shared>
+  </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="2fec090b-4b2f-4640-a32e-d2c6e91a190c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/game/TicTacToeResultPublisher.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/activities/TicTacToeActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/activities/TicTacToeActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/game/TicTacToeGameController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/game/TicTacToeGameController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/model/TicTacToeTable.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/model/TicTacToeTable.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/viewmodel/TicTacToeGameViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/viewmodel/TicTacToeGameViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/views/TicTacToeGameView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/views/TicTacToeGameView.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_tic_tac_

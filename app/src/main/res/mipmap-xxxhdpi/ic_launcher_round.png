@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config>
+        <target>android-29</target>
+      </config>
+    </shared>
+  </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="2fec090b-4b2f-4640-a32e-d2c6e91a190c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/game/TicTacToeResultPublisher.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/activities/TicTacToeActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/activities/TicTacToeActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/game/TicTacToeGameController.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/game/TicTacToeGameController.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/model/TicTacToeTable.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/model/TicTacToeTable.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/viewmodel/TicTacToeGameViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/viewmodel/TicTacToeGameViewModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/views/TicTacToeGameView.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/views/TicTacToeGameView.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_tic_tac_toe.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_tic_tac_toe.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values-es/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values-es/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values-pt/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values-pt/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view />
+      </state>
+    </system>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/activities/TicTacToeActivity.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="459">
+              <caret line="34" selection-start-line="34" selection-end-line="34" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="74" lean-forward="true" selection-start-line="6" selection-start-column="74" selection-end-line="6" selection-end-column="74" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values-es/strings.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="11" column="37" selection-start-line="11" selection-start-column="37" selection-end-line="11" selection-end-column="37" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values-pt/strings.xml">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_tic_tac_toe.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="459">
+              <caret line="27" column="57" selection-start-line="27" selection-start-column="57" selection-end-line="27" selection-end-column="57" />
+            </state>
+          </provider>
+          <provider editor-type-id="android-designer2" />
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="layoutResourceFile_vertical" />
+        <option value="valueResourceFile" />
+        <option value="resourceFile" />
+        <option value="Kotlin File" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>View</find>
+      <find>Text</find>
+      <find>&lt;View</find>
+      <find>ImageView</find>
+      <find>x_</find>
+      <find>&lt;ImageView</find>
+      <find>dataBinding</find>
+      <find>mutable</find>
+      <find>enu</find>
+      <find>o_item_background</find>
+      <find>?: null</find>
+      <find>viewModel.ticTacToeTable.value?.cells?.get(</find>
+      <find>)?.get(</find>
+      <find>) }</find>
+      <find>table[</find>
+      <find>@injec</find>
+      <find>Inject</find>
+      <find>PastimesPreferences(</find>
+      <find>SettingsModule</find>
+      <find>initdagg</find>
+      <find>dagger(</find>
+      <find>enum</find>
+      <find>cells[0]</find>
+      <find>Row</find>
+      <find>.changedCell</find>
+      <find>changedCell</find>
+      <find>.TicTacToeGameView</find>
+      <find>&lt;string name=&quot;di</find>
+      <find>&lt;string name=&quot;difficulty_other_player</find>
+      <find>&lt;string name=&quot;difficulty_other_player&quot;&gt;</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>android:id=&quot;@+id/cell3</replace>
+      <replace>app:layout_row=&quot;3&quot;</replace>
+      <replace>android:</replace>
+      <replace>layout_column</replace>
+      <replace>cell0</replace>
+      <replace>cell1</replace>
+      <replace>cell2</replace>
+      <replace>android:layout_column=&quot;2&quot;</replace>
+      <replace>0&quot;</replace>
+      <replace>android:layout_row=&quot;2&quot;</replace>
+      <replace>android:onClick=&quot;@{(source)</replace>
+      <replace>@{source</replace>
+      <replace>text</replace>
+      <replace>android:text</replace>
+      <replace>TextView</replace>
+      <replace>gameViewModel</replace>
+      <replace>View</replace>
+      <replace>10%</replace>
+      <replace>y_</replace>
+      <replace>o_</replace>
+      <replace>&lt;ImageView</replace>
+      <replace>com.elihimas.games.pastimes.views.GameCell</replace>
+      <replace>&lt;View</replace>
+      <replace>table[</replace>
+      <replace>][</replace>
+      <replace>] }</replace>
+      <replace>table.cells[</replace>
+      <replace>cells[1]</replace>
+      <replace>cells[2]</replace>
+      <replace>Column</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/activities/GameMode.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/model/PastimesPreferences.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/dagger/AppModule.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/PastimesApplication.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_dificulty.xml" />
+        <option value="$PROJECT_DIR$/app/build/generated/source/buildConfig/debug/com/elihimas/games/pastimes/BuildConfig.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/activities/PastimesActivity.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/activities/BasePastimesActivity.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/game_view.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/GameView.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/color/tic_tac_toe_background.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/tic_tac_toe_background.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values-v21/styles.xml" />
+        <option value="$PROJECT_DIR$/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/res/color/letters_color.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/activities/StarterActivityBase.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/activities/StarterActivity.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/viewmodels/TicTacToeViewModel.kt" />
+        <option value="$PROJECT_DIR$/app/build/generated/source/kapt/debug/com/elihimas/games/pastimes/DataBinderMapperImpl.java" />
+        <option value="$PROJECT_DIR$/app/build/generated/data_binding_base_class_source_out/debug/dataBindingGenBaseClassesDebug/out/com/elihimas/games/pastimes/databinding/TicTacToeGameViewBinding.java" />
+        <option value="$PROJECT_DIR$/app/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/TicTacToeGameView.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/views/CellView.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/activities/DifficultyActivity.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/views/GameCell.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/dimens.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/o_item_background.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/x_item_background.xml" />
+        <option value="$PROJECT_DIR$/gradle.properties" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/viewmodel/TicTacToeViewModel.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/game/GameMode.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/colors.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/drawable/empty_cell_background.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/styles.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/tic_tac_toe_game_view.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/activities/FirstSetupActivity.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/preferences/PastimesPreferences.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/dagger/SettingsModule.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/dagger/GamesModule.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/dagger/ApplicationComponent.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/viewmodel/TicTacToeGameViewModel.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/views/TicTacToeGameView.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/game/TicTacToeResultPublisher.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/model/TicTacToeTable.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/game/TicTacToeGameController.kt" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_tic_tac_toe.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values-es/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values-pt/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes/activities/TicTacToeActivity.kt" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="990" />
+    <option name="width" value="940" />
+    <option name="height" value="1090" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
+      <pane id="Scope" />
+      <pane id="AndroidView" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DEBUGGABLE_DEVICE" value="403dpi_API_28 [emulator-5554]" />
+    <property name="DEBUGGABLE_PROCESS" value="com.elihimas.games.pastimes" />
+    <property name="DEBUGGER_ID" value="Auto" />
+    <property name="SHOW_ALL_PROCESSES" value="false" />
+    <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
+    <property name="device.picker.selection" value="403dpi_API_28" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/app/src/main/java/com/elihimas/games/pastimes" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../asd/pastimes/app" />
+    <property name="not.eligible.for.single.variant.sync" value="true" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.XML" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\a
