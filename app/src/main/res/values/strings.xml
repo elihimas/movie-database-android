@@ -1,5 +1,8 @@
 <resources>
-    <string name="app_name">Movie Database</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
+    <string name="app_name">Movies</string>
+
+    <string name="tab_genre_action">Ação</string>
+    <string name="tab_genre_drama">Drama</string>
+    <string name="tab_genre_fantasy">Fantasia</string>
+    <string name="tab_genre_fiction">Ficção</string>
 </resources>
