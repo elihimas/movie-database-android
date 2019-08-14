@@ -5,7 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activities.MoviesGenresActivity">
+        tools:context=".activities.SearchActivity">
 
     <com.google.android.material.appbar.AppBarLayout
             android:layout_height="wrap_content"
@@ -14,22 +14,20 @@
 
         <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
+                android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:layout_width="match_parent"
-                app:layout_collapseMode="pin"
-                app:popupTheme="@style/AppTheme.PopupOverlay" />
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
-        <com.google.android.material.tabs.TabLayout
-                android:id="@+id/tabsGenres"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?attr/colorPrimary"/>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.viewpager.widget.ViewPager
-            android:id="@+id/movies_genres_pager"
+    <fragment
+            android:id="@+id/search_fragment"
+            android:name="com.elihimas.moviedatabase.activities.SearchActivityFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:layout="@layout/fragment_search"/>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

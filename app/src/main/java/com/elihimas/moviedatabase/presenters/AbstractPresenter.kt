@@ -7,7 +7,7 @@ abstract class AbstractPresenter<T> : BasePresenter<T> {
 
     var view: T? = null
 
-    private val compositeDisposable = CompositeDisposable()
+    val compositeDisposable = CompositeDisposable()
 
     override fun attach(view: Any) {
         this.view = view as T
@@ -17,7 +17,7 @@ abstract class AbstractPresenter<T> : BasePresenter<T> {
         compositeDisposable.add(disposable)
     }
 
-    override fun destroy() {
+    override fun onDestroy() {
         compositeDisposable.dispose()
     }
 

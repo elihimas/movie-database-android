@@ -13,7 +13,7 @@ enum class Genre {
             FICTION -> R.string.tab_genre_fiction
         }
 
-    fun getDatabaseId() =
+    fun getIdOnMoviesDatabase() =
         when (this) {
             ACTION -> 28
             DRAMA -> 18

@@ -8,5 +8,5 @@ interface BasePresenter<T> {
 
     fun addDisable(disposable: Disposable)
 
-    fun destroy()
+    fun onDestroy()
 }

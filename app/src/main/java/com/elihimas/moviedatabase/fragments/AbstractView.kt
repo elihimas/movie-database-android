@@ -18,7 +18,7 @@ abstract class AbstractView<T : BasePresenter<*>> : Fragment(), BaseView {
     override fun onDestroy() {
         super.onDestroy()
 
-        presenter?.destroy()
+        presenter?.onDestroy()
     }
 
     abstract fun createPresenter(): T

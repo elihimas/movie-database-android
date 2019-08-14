@@ -1,7 +1,9 @@
 package com.elihimas.moviedatabase.api
 
+import com.elihimas.moviedatabase.model.Movie
 import io.reactivex.Single
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface MoviesDatabaseRetrofit {
@@ -12,5 +14,8 @@ interface MoviesDatabaseRetrofit {
     }
 
     @GET("discover/movie")
-    fun discoverMovies(@Query("with_genres") genre: Int): Single<ListMoviesResponse>
+    fun listMovies(@Query("with_genres") genre: Int, @Query("page") page: Int): Single<ListMoviesResponse>
+
+    @GET("movie/{movie_id}")
+    fun getMoviedetails(@Path(value = "movie_id") movieId: Long): Single<Movie>
 }

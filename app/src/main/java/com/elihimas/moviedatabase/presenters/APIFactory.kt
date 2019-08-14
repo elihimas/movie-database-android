@@ -2,14 +2,18 @@ package com.elihimas.moviedatabase.presenters
 
 import com.elihimas.moviedatabase.api.MoviesDatabaseRetrofit
 import com.google.gson.GsonBuilder
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import okhttp3.OkHttpClient
+import java.util.*
 
 
 object APIFactory {
-    fun createMoviesDatabaseRetrofit(): MoviesDatabaseRetrofit? {
+    private const val API_KEY_PARAMETER = "api_key"
+    private const val LANG_PARAMETER = "language"
+
+    fun createMoviesDatabaseRetrofit(): MoviesDatabaseRetrofit {
         val gson = GsonBuilder()
             .setLenient()
             .create()
@@ -18,8 +22,10 @@ object APIFactory {
             val originalRequest = chain.request()
             val originalRequestUrl = originalRequest.url()
 
+            val language = Locale.getDefault().toLanguageTag()
             val updatedUrl = originalRequestUrl.newBuilder()
-                .addQueryParameter("api_key", MoviesDatabaseRetrofit.API_KEY)
+                .addQueryParameter(API_KEY_PARAMETER, MoviesDatabaseRetrofit.API_KEY)
+                .addQueryParameter(LANG_PARAMETER, language)
                 .build()
 
             val updatedRequest = originalRequest.newBuilder().url(updatedUrl).build()
