@@ -4,14 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import com.elihimas.moviedatabase.MoviesDatabaseApplication
 import com.elihimas.moviedatabase.R
+import com.elihimas.moviedatabase.api.ListMoviesResponse
 import com.elihimas.moviedatabase.contracts.MovesGenreContract
 import com.elihimas.moviedatabase.model.Genre
 import kotlinx.android.synthetic.main.fragment_movie_genre.*
 
-class MoviesGenreFragment : BaseView<MovesGenreContract.Presenter>(), MovesGenreContract.MovesGenreView {
+class MoviesGenreFragment : AbstractView<MovesGenreContract.Presenter>(), MovesGenreContract.MovesGenreView {
+
+
     companion object {
 
         private const val ARG_GENRE = "genre"
@@ -23,10 +25,6 @@ class MoviesGenreFragment : BaseView<MovesGenreContract.Presenter>(), MovesGenre
                 }
             }
         }
-    }
-
-    override fun injectDagger() {
-
     }
 
     override fun onCreateView(
@@ -47,8 +45,28 @@ class MoviesGenreFragment : BaseView<MovesGenreContract.Presenter>(), MovesGenre
 
     override fun createPresenter() = MoviesDatabaseApplication.appComponent.moviesGenrePresenter
 
-    override fun showMovies() {
-        tvLabel.text = "showMovies()"
+    override fun showLoading() {
+        requireActivity().runOnUiThread {
+            tvLabel.text = "${tvLabel.text} \nshowLoading()"
+        }
+    }
+
+    override fun hideLoading() {
+        requireActivity().runOnUiThread {
+            tvLabel.text = "${tvLabel.text} \nhideLoading()"
+        }
+    }
+
+    override fun showError(cause: Throwable) {
+        requireActivity().runOnUiThread {
+            tvLabel.text = "${tvLabel.text} \nshowError() ${cause.localizedMessage}"
+        }
+    }
+
+    override fun showMovies(response: ListMoviesResponse) {
+        requireActivity().runOnUiThread {
+            tvLabel.text = "${tvLabel.text} \nshowMovies() page: ${response.page}"
+        }
     }
 
 }
