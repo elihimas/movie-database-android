@@ -2,13 +2,17 @@ package com.elihimas.moviedatabase.presenters
 
 import androidx.paging.PageKeyedDataSource
 import com.elihimas.moviedatabase.api.MoviesDatabaseRetrofit
+import com.elihimas.moviedatabase.fragments.BaseView
 import com.elihimas.moviedatabase.model.Movie
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import java.lang.IllegalStateException
 
 class MoviesDataSource private constructor(
     private val moviesDatabaseRetrofit: MoviesDatabaseRetrofit,
     private val compositeDisposable: CompositeDisposable,
+    private val view: BaseView?,
     private val errorCallback: (cause: Throwable) -> Unit
 ) :
     PageKeyedDataSource<Int, Movie>() {
@@ -20,18 +24,19 @@ class MoviesDataSource private constructor(
         moviesDatabaseRetrofit: MoviesDatabaseRetrofit,
         compositeDisposable: CompositeDisposable,
         errorCallback: (cause: Throwable) -> Unit,
+        view: BaseView?,
         genreId: Int
-    ) : this(moviesDatabaseRetrofit, compositeDisposable, errorCallback) {
+    ) : this(moviesDatabaseRetrofit, compositeDisposable, view, errorCallback) {
         this.genreId = genreId
     }
-
 
     constructor(
         moviesDatabaseRetrofit: MoviesDatabaseRetrofit,
         compositeDisposable: CompositeDisposable,
         errorCallback: (cause: Throwable) -> Unit,
+        view: BaseView?,
         searchQuery: String
-    ) : this(moviesDatabaseRetrofit, compositeDisposable, errorCallback) {
+    ) : this(moviesDatabaseRetrofit, compositeDisposable, view, errorCallback) {
         this.searchQuery = searchQuery
     }
 
@@ -61,9 +66,19 @@ class MoviesDataSource private constructor(
         } ?: throw IllegalStateException("nor genreId nor search query defined")
 
         compositeDisposable.add(
-            moviesDisposable.map { response ->
-                response.movies
-            }.subscribe(onSuccess, onFailure)
+            moviesDisposable
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnSubscribe{
+                    view?.showLoading()
+                }
+                .doFinally{
+                    view?.hideLoading()
+                }
+                .map { response ->
+                    response.movies
+                }
+                .subscribe(onSuccess, onFailure)
         )
     }
 

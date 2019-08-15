@@ -20,5 +20,5 @@ interface MoviesDatabaseRetrofit {
     fun searchMovies(@Query("query") query: String, @Query("page") page: Int): Single<ListMoviesResponse>
 
     @GET("movie/{movie_id}")
-    fun getMoviedetails(@Path(value = "movie_id") movieId: Long): Single<Movie>
+    fun getMovieDetails(@Path(value = "movie_id") movieId: Long): Single<Movie>
 }

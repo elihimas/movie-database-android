@@ -9,12 +9,12 @@ import androidx.paging.PagedList
 import com.elihimas.moviedatabase.MoviesDatabaseApplication
 import com.elihimas.moviedatabase.R
 import com.elihimas.moviedatabase.adapters.MoviesAdapter
-import com.elihimas.moviedatabase.contracts.MovesGenreContract
+import com.elihimas.moviedatabase.contracts.MoviesGenreContract
 import com.elihimas.moviedatabase.model.Genre
 import com.elihimas.moviedatabase.model.Movie
 import kotlinx.android.synthetic.main.fragment_movies_list.*
 
-class MoviesListFragment : AbstractView<MovesGenreContract.Presenter>(), MovesGenreContract.MovesGenreView {
+class MoviesListFragment : AbstractView<MoviesGenreContract.Presenter>(), MoviesGenreContract.MoviesGenreView {
 
     companion object {
         private const val ARG_GENRE = "genre"
@@ -53,29 +53,17 @@ class MoviesListFragment : AbstractView<MovesGenreContract.Presenter>(), MovesGe
     override fun createPresenter() = MoviesDatabaseApplication.appComponent.moviesGenrePresenter
 
     override fun showLoading() {
-        requireActivity().runOnUiThread {
-            items_recycler.visibility = View.GONE
-            progress_bar.visibility = View.VISIBLE
-        }
+        items_recycler.visibility = View.GONE
+        progress_bar.visibility = View.VISIBLE
     }
 
     override fun hideLoading() {
-        requireActivity().runOnUiThread {
-            items_recycler.visibility = View.VISIBLE
-            progress_bar.visibility = View.GONE
-        }
-    }
-
-    override fun showError(cause: Throwable) {
-        requireActivity().runOnUiThread {
-            Toast.makeText(requireContext(), R.string.loading_error, Toast.LENGTH_LONG).show()
-        }
+        items_recycler.visibility = View.VISIBLE
+        progress_bar.visibility = View.GONE
     }
 
     override fun showMovies(movies: PagedList<Movie>) {
-        requireActivity().runOnUiThread {
-            moviesAdapter.submitList(movies)
-        }
+        moviesAdapter.submitList(movies)
     }
 
     fun searchMovies(query: String) {

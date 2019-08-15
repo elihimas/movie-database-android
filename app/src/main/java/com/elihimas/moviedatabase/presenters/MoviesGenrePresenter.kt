@@ -1,14 +1,15 @@
 package com.elihimas.moviedatabase.presenters
 
 import androidx.paging.PagedList
-import com.elihimas.moviedatabase.contracts.MovesGenreContract
+import com.elihimas.moviedatabase.contracts.MoviesGenreContract
 import com.elihimas.moviedatabase.model.Genre
 import com.elihimas.moviedatabase.model.Movie
 
 class MoviesGenrePresenter :
-    AbstractPresenter<MovesGenreContract.MovesGenreView>(),
-    MovesGenreContract.Presenter {
+    AbstractPresenter<MoviesGenreContract.MoviesGenreView>(),
+    MoviesGenreContract.Presenter {
 
+    private val moviesDatabaseRetrofit = APIFactory.createMoviesDatabaseRetrofit()
     private var pagedMoviesDataSourceFactory: PagedMoviesDataSourceFactory? = null
 
     private fun onSuccess(movies: PagedList<Movie>) {
@@ -21,31 +22,25 @@ class MoviesGenrePresenter :
         view?.showError(throwable)
     }
 
-    override fun searchMovies(query: String) {
-        val moviesDatabaseRetrofit = APIFactory.createMoviesDatabaseRetrofit()
-
-        view?.showLoading()
-
+    override fun setGenre(genre: Genre) {
+        val genreId = genre.getIdOnMoviesDatabase()
         pagedMoviesDataSourceFactory = PagedMoviesDataSourceFactory(
             moviesDatabaseRetrofit,
+            view,
+            genreId,
             ::onSuccess,
-            ::onFailure,
-            query
+            ::onFailure
         )
     }
 
 
-    override fun setGenre(genre: Genre) {
-        val moviesDatabaseRetrofit = APIFactory.createMoviesDatabaseRetrofit()
-
-        view?.showLoading()
-
-        val genreId = genre.getIdOnMoviesDatabase()
+    override fun searchMovies(query: String) {
         pagedMoviesDataSourceFactory = PagedMoviesDataSourceFactory(
             moviesDatabaseRetrofit,
+            view,
+            query,
             ::onSuccess,
-            ::onFailure,
-            genreId
+            ::onFailure
         )
     }
 
