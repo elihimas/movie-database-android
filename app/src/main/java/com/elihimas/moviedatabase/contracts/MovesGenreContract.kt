@@ -13,5 +13,6 @@ interface MovesGenreContract {
 
     interface Presenter : BasePresenter<MovesGenreView> {
         fun setGenre(genre: Genre)
+        fun searchMovies(query: String)
     }
 }

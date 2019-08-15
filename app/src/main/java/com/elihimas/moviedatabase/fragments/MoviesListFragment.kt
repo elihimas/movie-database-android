@@ -77,4 +77,8 @@ class MoviesListFragment : AbstractView<MovesGenreContract.Presenter>(), MovesGe
             moviesAdapter.submitList(movies)
         }
     }
+
+    fun searchMovies(query: String) {
+        presenter?.searchMovies(query)
+    }
 }

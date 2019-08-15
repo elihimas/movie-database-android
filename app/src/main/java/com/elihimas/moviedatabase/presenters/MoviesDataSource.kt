@@ -1,18 +1,39 @@
 package com.elihimas.moviedatabase.presenters
 
-import androidx.paging.ItemKeyedDataSource
 import androidx.paging.PageKeyedDataSource
 import com.elihimas.moviedatabase.api.MoviesDatabaseRetrofit
 import com.elihimas.moviedatabase.model.Movie
 import io.reactivex.disposables.CompositeDisposable
+import java.lang.IllegalStateException
 
-class MoviesDataSource(
+class MoviesDataSource private constructor(
     private val moviesDatabaseRetrofit: MoviesDatabaseRetrofit,
-    private val genreId: Int,
     private val compositeDisposable: CompositeDisposable,
     private val errorCallback: (cause: Throwable) -> Unit
 ) :
     PageKeyedDataSource<Int, Movie>() {
+
+    private var genreId: Int? = null
+    private var searchQuery: String? = null
+
+    constructor(
+        moviesDatabaseRetrofit: MoviesDatabaseRetrofit,
+        compositeDisposable: CompositeDisposable,
+        errorCallback: (cause: Throwable) -> Unit,
+        genreId: Int
+    ) : this(moviesDatabaseRetrofit, compositeDisposable, errorCallback) {
+        this.genreId = genreId
+    }
+
+
+    constructor(
+        moviesDatabaseRetrofit: MoviesDatabaseRetrofit,
+        compositeDisposable: CompositeDisposable,
+        errorCallback: (cause: Throwable) -> Unit,
+        searchQuery: String
+    ) : this(moviesDatabaseRetrofit, compositeDisposable, errorCallback) {
+        this.searchQuery = searchQuery
+    }
 
     private companion object {
         const val FIRST_PAGE = 1
@@ -20,7 +41,7 @@ class MoviesDataSource(
 
     override fun loadInitial(params: LoadInitialParams<Int>, loadInitialCallback: LoadInitialCallback<Int, Movie>) {
         loadPage(FIRST_PAGE) { movies ->
-            loadInitialCallback.onResult(movies, -1, 2)
+            loadInitialCallback.onResult(movies, -1, FIRST_PAGE + 1)
         }
     }
 
@@ -33,8 +54,14 @@ class MoviesDataSource(
             errorCallback(cause)
         }
 
+        val moviesDisposable = genreId?.let { genreId ->
+            moviesDatabaseRetrofit.listMoviesByGenre(genreId, page)
+        } ?: searchQuery?.let { searchQuery ->
+            moviesDatabaseRetrofit.searchMovies(searchQuery, page)
+        } ?: throw IllegalStateException("nor genreId nor search query defined")
+
         compositeDisposable.add(
-            moviesDatabaseRetrofit.listMovies(genreId, page).map { response ->
+            moviesDisposable.map { response ->
                 response.movies
             }.subscribe(onSuccess, onFailure)
         )

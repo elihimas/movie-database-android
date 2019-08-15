@@ -6,12 +6,16 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.inputmethod.InputMethodManager
+import android.widget.ImageView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.res.ResourcesCompat
 import com.elihimas.moviedatabase.R
-
+import com.elihimas.moviedatabase.fragments.MoviesListFragment
 import kotlinx.android.synthetic.main.activity_search.*
+
 
 class SearchActivity : AppCompatActivity() {
     companion object {
@@ -35,6 +39,17 @@ class SearchActivity : AppCompatActivity() {
 
     private fun performSearch(query: String) {
         Toast.makeText(this, "query: $query", Toast.LENGTH_LONG).show()
+
+        (search_fragment as MoviesListFragment).searchMovies(query)
+
+        hideKeyboard()
+    }
+
+    private fun hideKeyboard() {
+        currentFocus?.let { currentFocus ->
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(currentFocus.windowToken, 0)
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -52,9 +67,10 @@ class SearchActivity : AppCompatActivity() {
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
         (menu.findItem(R.id.search).actionView as SearchView).apply {
             setSearchableInfo(searchManager.getSearchableInfo(componentName))
-            setIconifiedByDefault(false) // Do not iconify the widget; expand it by default
             setQuery("", false)
             requestFocus()
+
+            isIconified = false
 
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String): Boolean {
@@ -64,7 +80,7 @@ class SearchActivity : AppCompatActivity() {
                 }
 
                 override fun onQueryTextChange(newText: String): Boolean {
-                    performSearch("onQueryTextChange" + newText)
+//                    performSearch("onQueryTextChange" + newText)
 
                     return true
                 }

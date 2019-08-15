@@ -7,6 +7,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
+import okhttp3.logging.HttpLoggingInterceptor
 
 
 object APIFactory {
@@ -18,7 +19,7 @@ object APIFactory {
             .setLenient()
             .create()
 
-        val addCredentialsClient = OkHttpClient.Builder().addInterceptor { chain ->
+        val addApiKeyAndLanguageClient = OkHttpClient.Builder().addInterceptor { chain ->
             val originalRequest = chain.request()
             val originalRequestUrl = originalRequest.url()
 
@@ -32,10 +33,17 @@ object APIFactory {
             chain.proceed(updatedRequest)
         }.build()
 
+        val loggingClient = OkHttpClient.Builder()
+            .addInterceptor(HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BODY
+            })
+            .build()
+
         return Retrofit.Builder().baseUrl(MoviesDatabaseRetrofit.BASE_URL)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson))
-            .client(addCredentialsClient)
+            .client(addApiKeyAndLanguageClient)
+            .client(loggingClient)
             .build().create(MoviesDatabaseRetrofit::class.java)
 
     }

@@ -2,7 +2,5 @@
     <item android:id="@+id/search"
           android:title=""
           app:showAsAction="always"
-          app:searchIcon="@null"
-          app:iconifiedByDefault="false"
           app:actionViewClass="androidx.appcompat.widget.SearchView"/>
 </menu>
