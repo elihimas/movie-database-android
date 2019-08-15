@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.elihimas.moviedatabase.MoviesDatabaseApplication
 import com.elihimas.moviedatabase.R
@@ -13,16 +12,16 @@ import com.elihimas.moviedatabase.adapters.MoviesAdapter
 import com.elihimas.moviedatabase.contracts.MovesGenreContract
 import com.elihimas.moviedatabase.model.Genre
 import com.elihimas.moviedatabase.model.Movie
-import kotlinx.android.synthetic.main.fragment_movie_genre.*
+import kotlinx.android.synthetic.main.fragment_movies_list.*
 
-class MoviesGenreFragment : AbstractView<MovesGenreContract.Presenter>(), MovesGenreContract.MovesGenreView {
+class MoviesListFragment : AbstractView<MovesGenreContract.Presenter>(), MovesGenreContract.MovesGenreView {
 
     companion object {
         private const val ARG_GENRE = "genre"
 
         @JvmStatic
-        fun newInstance(genre: Genre): MoviesGenreFragment {
-            return MoviesGenreFragment().apply {
+        fun newInstance(genre: Genre): MoviesListFragment {
+            return MoviesListFragment().apply {
                 arguments = Bundle().apply {
                     putSerializable(ARG_GENRE, genre)
                 }
@@ -39,15 +38,14 @@ class MoviesGenreFragment : AbstractView<MovesGenreContract.Presenter>(), MovesG
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_movie_genre, container, false)
+        return inflater.inflate(R.layout.fragment_movies_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        val genre = arguments?.getSerializable(ARG_GENRE) as Genre
-        presenter?.setGenre(genre)
+        val genre = arguments?.getSerializable(ARG_GENRE) as Genre?
+        genre?.let { genre -> presenter?.setGenre(genre) }
 
         items_recycler.adapter = moviesAdapter
     }

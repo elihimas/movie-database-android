@@ -17,10 +17,13 @@ class MoviesGenresActivity : AppCompatActivity() {
 
         movies_genres_pager.adapter = MoviesGenresPagerAdapter(this, supportFragmentManager)
         tabsGenres.setupWithViewPager(movies_genres_pager)
+
+        //TODO remove
+        startSearchActivity()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.movies_genres, menu)
+        menuInflater.inflate(R.menu.movies_genres_menu, menu)
 
         return true
     }

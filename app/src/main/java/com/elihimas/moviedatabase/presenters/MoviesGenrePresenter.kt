@@ -10,7 +10,7 @@ class MoviesGenrePresenter :
     AbstractPresenter<MovesGenreContract.MovesGenreView>(),
     MovesGenreContract.Presenter {
 
-    private lateinit var pagedMoviesDataSourceFactory: PagedMoviesDataSourceFactory
+    private var pagedMoviesDataSourceFactory: PagedMoviesDataSourceFactory? = null
 
 
     override fun setGenre(genre: Genre) {
@@ -39,7 +39,7 @@ class MoviesGenrePresenter :
     override fun onDestroy() {
         super.onDestroy()
 
-        pagedMoviesDataSourceFactory.onDestroy()
+        pagedMoviesDataSourceFactory?.onDestroy()
     }
 }
 

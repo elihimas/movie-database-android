@@ -3,11 +3,10 @@
 
     <string name="loading_error">Não foi possível carregar os filmes. Tente novamente mais tarde</string>
 
+    <string name="search_hint">Pesquisar filmes</string>
+
     <string name="tab_genre_action">Ação</string>
     <string name="tab_genre_drama">Drama</string>
     <string name="tab_genre_fantasy">Fantasia</string>
     <string name="tab_genre_fiction">Ficção</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_search">SearchActivity</string>
 </resources>
