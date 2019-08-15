@@ -17,9 +17,6 @@ class MoviesGenresActivity : AppCompatActivity() {
 
         movies_genres_pager.adapter = MoviesGenresPagerAdapter(this, supportFragmentManager)
         tabsGenres.setupWithViewPager(movies_genres_pager)
-
-        //TODO remove
-        startSearchActivity()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

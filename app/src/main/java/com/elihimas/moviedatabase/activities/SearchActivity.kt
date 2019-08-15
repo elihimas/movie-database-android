@@ -74,13 +74,13 @@ class SearchActivity : AppCompatActivity() {
 
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String): Boolean {
-                    performSearch("onQueryTextSubmit" + query)
+                    performSearch(query)
 
                     return true
                 }
 
                 override fun onQueryTextChange(newText: String): Boolean {
-//                    performSearch("onQueryTextChange" + newText)
+//                    performSearch(newText)
 
                     return true
                 }

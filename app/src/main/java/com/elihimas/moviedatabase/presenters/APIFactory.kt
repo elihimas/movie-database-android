@@ -19,31 +19,30 @@ object APIFactory {
             .setLenient()
             .create()
 
-        val addApiKeyAndLanguageClient = OkHttpClient.Builder().addInterceptor { chain ->
-            val originalRequest = chain.request()
-            val originalRequestUrl = originalRequest.url()
+        val language = Locale.getDefault().toLanguageTag()
 
-            val language = Locale.getDefault().toLanguageTag()
-            val updatedUrl = originalRequestUrl.newBuilder()
-                .addQueryParameter(API_KEY_PARAMETER, MoviesDatabaseRetrofit.API_KEY)
-                .addQueryParameter(LANG_PARAMETER, language)
-                .build()
-
-            val updatedRequest = originalRequest.newBuilder().url(updatedUrl).build()
-            chain.proceed(updatedRequest)
-        }.build()
-
-        val loggingClient = OkHttpClient.Builder()
+        val client = OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY
             })
+            .addInterceptor { chain ->
+                val originalRequest = chain.request()
+                val originalRequestUrl = originalRequest.url()
+
+                val updatedUrl = originalRequestUrl.newBuilder()
+                    .addQueryParameter(API_KEY_PARAMETER, MoviesDatabaseRetrofit.API_KEY)
+                    .addQueryParameter(LANG_PARAMETER, language)
+                    .build()
+
+                val updatedRequest = originalRequest.newBuilder().url(updatedUrl).build()
+                chain.proceed(updatedRequest)
+            }
             .build()
 
         return Retrofit.Builder().baseUrl(MoviesDatabaseRetrofit.BASE_URL)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson))
-            .client(addApiKeyAndLanguageClient)
-            .client(loggingClient)
+            .client(client)
             .build().create(MoviesDatabaseRetrofit::class.java)
 
     }
