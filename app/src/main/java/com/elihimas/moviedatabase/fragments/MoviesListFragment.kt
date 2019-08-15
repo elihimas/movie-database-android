@@ -53,17 +53,23 @@ class MoviesListFragment : AbstractView<MoviesGenreContract.Presenter>(), Movies
     override fun createPresenter() = MoviesDatabaseApplication.appComponent.moviesGenrePresenter
 
     override fun showLoading() {
-        items_recycler.visibility = View.GONE
-        progress_bar.visibility = View.VISIBLE
+        requireActivity().runOnUiThread {
+            items_recycler.visibility = View.GONE
+            progress_bar.visibility = View.VISIBLE
+        }
     }
 
     override fun hideLoading() {
-        items_recycler.visibility = View.VISIBLE
-        progress_bar.visibility = View.GONE
+        requireActivity().runOnUiThread {
+            items_recycler.visibility = View.VISIBLE
+            progress_bar.visibility = View.GONE
+        }
     }
 
     override fun showMovies(movies: PagedList<Movie>) {
-        moviesAdapter.submitList(movies)
+        requireActivity().runOnUiThread {
+            moviesAdapter.submitList(movies)
+        }
     }
 
     fun searchMovies(query: String) {

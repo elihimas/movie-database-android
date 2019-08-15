@@ -41,7 +41,7 @@ class MoviesDataSource private constructor(
     }
 
     private companion object {
-        const val FIRST_PAGE = 1
+        const val FIRST_PAGE = 0
     }
 
     override fun loadInitial(params: LoadInitialParams<Int>, loadInitialCallback: LoadInitialCallback<Int, Movie>) {
@@ -60,7 +60,7 @@ class MoviesDataSource private constructor(
         //nothing to do
     }
 
-    private fun loadPage(page: Int, callback: (movies: List<Movie>) -> Unit) {
+    private fun loadPage(zeroBasedPage: Int, callback: (movies: List<Movie>) -> Unit) {
         val onSuccess = fun(movies: List<Movie>) {
             callback(movies)
         }
@@ -69,21 +69,27 @@ class MoviesDataSource private constructor(
             errorCallback(cause)
         }
 
+        val moviesDatabasePageIndex = zeroBasedPage + 1
+
         val moviesDisposable = genreId?.let { genreId ->
-            moviesDatabaseRetrofit.listMoviesByGenre(genreId, page)
+            moviesDatabaseRetrofit.listMoviesByGenre(genreId, moviesDatabasePageIndex)
         } ?: searchQuery?.let { searchQuery ->
-            moviesDatabaseRetrofit.searchMovies(searchQuery, page)
-        } ?: throw IllegalStateException("nor genreId nor search query defined")
+            moviesDatabaseRetrofit.searchMovies(searchQuery, moviesDatabasePageIndex)
+        } ?: throw IllegalStateException("nor genreId nor searchQuery defined")
 
         compositeDisposable.add(
             moviesDisposable
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe{
-                    view?.showLoading()
+                .doOnSubscribe {
+                    if (zeroBasedPage == FIRST_PAGE) {
+                        view?.showLoading()
+                    }
                 }
-                .doFinally{
-                    view?.hideLoading()
+                .doFinally {
+                    if (zeroBasedPage == FIRST_PAGE) {
+                        view?.hideLoading()
+                    }
                 }
                 .map { response ->
                     response.movies

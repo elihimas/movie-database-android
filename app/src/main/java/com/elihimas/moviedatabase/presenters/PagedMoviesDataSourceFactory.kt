@@ -12,10 +12,13 @@ import java.lang.IllegalStateException
 class PagedMoviesDataSourceFactory private constructor(
     private val moviesDatabaseRetrofit: MoviesDatabaseRetrofit,
     private val view: BaseView?,
-    onSuccess: (PagedList<Movie>) -> Unit,
     private val errorCallback: (Throwable) -> Unit
 ) :
     DataSource.Factory<Int, Movie>() {
+
+    private companion object {
+        const val PAGE_SIZE = 20
+    }
 
     private var genreId: Int? = null
     private var searchQuery: String? = null
@@ -26,9 +29,8 @@ class PagedMoviesDataSourceFactory private constructor(
         moviesDatabaseRetrofit: MoviesDatabaseRetrofit,
         view: BaseView?,
         genreId: Int,
-        onSuccess: (PagedList<Movie>) -> Unit,
         errorCallback: (Throwable) -> Unit
-    ) : this(moviesDatabaseRetrofit, view, onSuccess, errorCallback) {
+    ) : this(moviesDatabaseRetrofit, view, errorCallback) {
         this.genreId = genreId
     }
 
@@ -36,22 +38,20 @@ class PagedMoviesDataSourceFactory private constructor(
         moviesDatabaseRetrofit: MoviesDatabaseRetrofit,
         view: BaseView?,
         searchQuery: String,
-        onSuccess: (PagedList<Movie>) -> Unit,
         errorCallback: (Throwable) -> Unit
-    ) : this(moviesDatabaseRetrofit, view, onSuccess, errorCallback) {
+    ) : this(moviesDatabaseRetrofit, view, errorCallback) {
         this.searchQuery = searchQuery
     }
 
-    init {
-        val config = PagedList.Config.Builder()
-            .setEnablePlaceholders(false)
-            .build()
-        val moviesPagedListObservable =
-            RxPagedListBuilder(
-                this, config
-            )
-                .buildObservable()
-        moviesPagedListObservable.subscribe(onSuccess)
+
+    val moviesPagedListObservable by lazy {
+        RxPagedListBuilder(
+            this,
+            PagedList.Config.Builder()
+                .setEnablePlaceholders(false)
+                .setPageSize(PAGE_SIZE)
+                .build()
+        ).buildObservable()
     }
 
     override fun create(): DataSource<Int, Movie> =

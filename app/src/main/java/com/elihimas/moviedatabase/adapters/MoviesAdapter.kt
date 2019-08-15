@@ -6,14 +6,13 @@ import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.elihimas.moviedatabase.R
 import com.elihimas.moviedatabase.activities.MovieDetailsActivity
 import com.elihimas.moviedatabase.model.Movie
 import kotlinx.android.synthetic.main.movie_item.view.*
 
-const val IMAGES_URL = "https://image.tmdb.org/t/p/w500/"
+const val IMAGES_URL = "https://image.tmdb.org/t/p/w342/"
 
 class MoviesAdapter : PagedListAdapter<Movie, MovieViewHolder>(MoviesDiffCallback()) {
 
@@ -32,9 +31,7 @@ class MoviesAdapter : PagedListAdapter<Movie, MovieViewHolder>(MoviesDiffCallbac
             holder.bind(movie)
         }
     }
-
 }
-
 
 class MovieViewHolder(private val view: View, private val strokeWidth: Float, private val centerRadius: Float) :
     RecyclerView.ViewHolder(view) {

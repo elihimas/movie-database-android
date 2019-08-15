@@ -7,13 +7,13 @@ abstract class AbstractPresenter<T> : BasePresenter<T> {
 
     var view: T? = null
 
-    val compositeDisposable = CompositeDisposable()
+    private val compositeDisposable = CompositeDisposable()
 
     override fun attach(view: Any) {
         this.view = view as T
     }
 
-    override fun addDisable(disposable: Disposable) {
+    override fun addDisposable(disposable: Disposable) {
         compositeDisposable.add(disposable)
     }
 

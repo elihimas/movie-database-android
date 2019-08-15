@@ -14,7 +14,7 @@ class MovieDetailsPresenter :
     override fun loadMovie(id: Long) {
         view?.showLoading()
 
-        addDisable(
+        addDisposable(
             moviesDatabaseRetrofit.getMovieDetails(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

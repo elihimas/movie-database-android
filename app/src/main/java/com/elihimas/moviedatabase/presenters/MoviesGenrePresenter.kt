@@ -28,9 +28,12 @@ class MoviesGenrePresenter :
             moviesDatabaseRetrofit,
             view,
             genreId,
-            ::onSuccess,
             ::onFailure
         )
+
+        pagedMoviesDataSourceFactory?.let { factory ->
+            addDisposable(factory.moviesPagedListObservable.subscribe(::onSuccess))
+        }
     }
 
 
@@ -39,9 +42,12 @@ class MoviesGenrePresenter :
             moviesDatabaseRetrofit,
             view,
             query,
-            ::onSuccess,
             ::onFailure
         )
+
+        pagedMoviesDataSourceFactory?.let { factory ->
+            addDisposable(factory.moviesPagedListObservable.subscribe(::onSuccess))
+        }
     }
 
     override fun onDestroy() {

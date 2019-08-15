@@ -6,7 +6,7 @@ interface BasePresenter<T> {
 
     fun attach(view: Any)
 
-    fun addDisable(disposable: Disposable)
+    fun addDisposable(disposable: Disposable)
 
     fun onDestroy()
 }
