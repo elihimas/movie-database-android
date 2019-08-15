@@ -7,17 +7,16 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.inputmethod.InputMethodManager
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import androidx.core.content.res.ResourcesCompat
-import com.elihimas.moviedatabase.R
 import com.elihimas.moviedatabase.fragments.MoviesListFragment
 import kotlinx.android.synthetic.main.activity_search.*
-
+import android.widget.LinearLayout
+import com.elihimas.moviedatabase.R
 
 class SearchActivity : AppCompatActivity() {
+
     companion object {
         fun start(context: Context) {
             context.startActivity(Intent(context, SearchActivity::class.java))

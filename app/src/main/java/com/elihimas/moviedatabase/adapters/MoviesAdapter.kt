@@ -21,7 +21,7 @@ class MoviesAdapter : PagedListAdapter<Movie, MovieViewHolder>(MoviesDiffCallbac
         val view = LayoutInflater.from(parent.context).inflate(R.layout.movie_item, parent, false)
         view.setOnClickListener {
             val movie = view.tag as Movie
-            MovieDetailsActivity.start(view.context, movie.id)
+            MovieDetailsActivity.start(view.context, movie.id, movie.title)
         }
 
         return MovieViewHolder(view, 5f, 30f)

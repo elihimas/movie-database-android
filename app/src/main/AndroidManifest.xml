@@ -17,13 +17,13 @@
             android:theme="@style/AppTheme">
         <activity
                 android:name=".activities.MovieDetailsActivity"
-                android:label="@string/title_activity_movie_details"
+                android:label=""
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
                 android:name=".activities.SearchActivity"
                 android:label=""
-                android:theme="@style/AppTheme.NoActionBar">
+                android:theme="@style/AppTheme.Search">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH"/>
             </intent-filter>

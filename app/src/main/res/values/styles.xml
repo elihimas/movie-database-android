@@ -6,11 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="searchViewStyle">@style/SearchView</item>
-    </style>
-
-    <style name="SearchView" parent="Widget.AppCompat.Light.SearchView">
-        <item name="searchHintIcon">@null</item>
+        <item name="android:windowBackground">@color/backgroundColor</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -18,14 +14,31 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="AppTheme.Search">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+        <item name="colorPrimary">@android:color/white</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">#0dd</item>
+
+        <item name="colorControlNormal">@color/searchToolbarColorControlNormal</item>
+
+        <item name="searchViewStyle">@style/SearchView</item>
+    </style>
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="SearchView" parent="Widget.AppCompat.Light.SearchView">
+        <item name="searchHintIcon">@null</item>
+    </style>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
     <style name="MovieTitle" parent="@android:style/TextAppearance">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">14sp</item>
         <item name="android:paddingStart">12dp</item>
         <item name="android:paddingTop">8dp</item>
         <item name="android:paddingBottom">14dp</item>
@@ -36,7 +49,10 @@
     <style name="HeaderText" parent="@android:style/TextAppearance">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:textStyle">bold</item>
+
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
     </style>
 </resources>

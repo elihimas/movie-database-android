@@ -23,5 +23,4 @@
 
     <include layout="@layout/content_movie_details"/>
 
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
