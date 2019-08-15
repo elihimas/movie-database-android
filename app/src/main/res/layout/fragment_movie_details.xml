@@ -8,38 +8,40 @@
     <ScrollView
             android:id="@+id/content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:showIn="@layout/activity_movie_details"
                 tools:context=".activities.MovieDetailsActivityFragment"
-                android:padding="@dimen/movie_details_padding">
-
+                android:padding="@dimen/movie_details_content_padding">
 
             <ImageView
                     android:id="@+id/poster_image"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
+                    android:adjustViewBounds="true"
+                    android:maxHeight="@dimen/poster_max_height_movie_details"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
+                    android:scaleType="centerCrop"
                     tools:src="@tools:sample/backgrounds/scenic"/>
 
             <TextView
                     style="@style/HeaderText"
                     android:id="@+id/description_label"
                     android:text="@string/description"
-                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/poster_image"/>
 
             <TextView
                     android:id="@+id/description_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/description_label"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

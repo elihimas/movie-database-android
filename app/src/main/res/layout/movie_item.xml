@@ -13,7 +13,7 @@
         <ImageView
                 android:id="@+id/poster_image"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/poster_height"
+                android:layout_height="@dimen/poster_height_movie_item"
                 android:scaleType="centerCrop"
                 android:layout_margin="1dp"
                 tools:src="@tools:sample/backgrounds/scenic"/>

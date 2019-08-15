@@ -3,8 +3,10 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="appbar_padding">16dp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
     <dimen name="appbar_padding_top">8dp</dimen>
-    <dimen name="poster_height">240dp</dimen>
-    <dimen name="movie_details_padding">4dp</dimen>
+
+    <dimen name="poster_height_movie_item">240dp</dimen>
+    <dimen name="poster_max_height_movie_details">480dp</dimen>
+    <dimen name="movie_details_content_padding">12dp</dimen>
+
 </resources>

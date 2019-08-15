@@ -37,11 +37,7 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun performSearch(query: String) {
-        Toast.makeText(this, "query: $query", Toast.LENGTH_LONG).show()
-
         (search_fragment as MoviesListFragment).searchMovies(query)
-
-        hideKeyboard()
     }
 
     private fun hideKeyboard() {
@@ -74,6 +70,8 @@ class SearchActivity : AppCompatActivity() {
             setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String): Boolean {
                     performSearch(query)
+
+                    hideKeyboard()
 
                     return true
                 }

@@ -50,6 +50,16 @@ class MoviesDataSource private constructor(
         }
     }
 
+    override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Movie>) {
+        loadPage(params.key) { movies ->
+            callback.onResult(movies, params.key + 1)
+        }
+    }
+
+    override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, Movie>) {
+        //nothing to do
+    }
+
     private fun loadPage(page: Int, callback: (movies: List<Movie>) -> Unit) {
         val onSuccess = fun(movies: List<Movie>) {
             callback(movies)
@@ -80,17 +90,6 @@ class MoviesDataSource private constructor(
                 }
                 .subscribe(onSuccess, onFailure)
         )
-    }
-
-
-    override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Movie>) {
-        loadPage(params.key) { movies ->
-            callback.onResult(movies, params.key + 1)
-        }
-    }
-
-    override fun loadBefore(params: LoadParams<Int>, callback: LoadCallback<Int, Movie>) {
-        //nothing to do
     }
 
 
