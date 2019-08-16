@@ -1,9 +1,11 @@
 package com.elihimas.moviedatabase.presenters
 
 import androidx.paging.PageKeyedDataSource
+import com.elihimas.moviedatabase.api.MoviesListResponse
 import com.elihimas.moviedatabase.api.MoviesDatabaseRetrofit
 import com.elihimas.moviedatabase.fragments.BaseView
 import com.elihimas.moviedatabase.model.Movie
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -16,6 +18,11 @@ class MoviesDataSource private constructor(
     private val errorCallback: (cause: Throwable) -> Unit
 ) :
     PageKeyedDataSource<Int, Movie>() {
+
+    private companion object {
+        const val FIRST_PAGE = 0
+        const val MIN_QUERY_LEN = 3
+    }
 
     private var genreId: Int? = null
     private var searchQuery: String? = null
@@ -38,10 +45,6 @@ class MoviesDataSource private constructor(
         searchQuery: String
     ) : this(moviesDatabaseRetrofit, compositeDisposable, view, errorCallback) {
         this.searchQuery = searchQuery
-    }
-
-    private companion object {
-        const val FIRST_PAGE = 0
     }
 
     override fun loadInitial(params: LoadInitialParams<Int>, loadInitialCallback: LoadInitialCallback<Int, Movie>) {
@@ -74,7 +77,11 @@ class MoviesDataSource private constructor(
         val moviesDisposable = genreId?.let { genreId ->
             moviesDatabaseRetrofit.listMoviesByGenre(genreId, moviesDatabasePageIndex)
         } ?: searchQuery?.let { searchQuery ->
-            moviesDatabaseRetrofit.searchMovies(searchQuery, moviesDatabasePageIndex)
+            if (searchQuery.length >= MIN_QUERY_LEN) {
+                moviesDatabaseRetrofit.searchMovies(searchQuery, moviesDatabasePageIndex)
+            } else {
+                Single.just(MoviesListResponse(1, 0, listOf<Movie>()))
+            }
         } ?: throw IllegalStateException("nor genreId nor searchQuery defined")
 
         compositeDisposable.add(

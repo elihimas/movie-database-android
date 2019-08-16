@@ -6,18 +6,27 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
+import android.widget.EditText
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
-import com.elihimas.moviedatabase.fragments.MoviesListFragment
-import kotlinx.android.synthetic.main.activity_search.*
-import android.widget.LinearLayout
+import androidx.core.view.children
+import androidx.core.view.get
 import com.elihimas.moviedatabase.R
+import com.elihimas.moviedatabase.fragments.MoviesListFragment
+import com.jakewharton.rxbinding.support.v7.widget.RxSearchView
+import kotlinx.android.synthetic.main.activity_search.*
+import rx.android.schedulers.AndroidSchedulers
+import java.util.concurrent.TimeUnit
+
 
 class SearchActivity : AppCompatActivity() {
 
     companion object {
+        private const val DEBOUNCE_MILLISECONDS = 500L
+
         fun start(context: Context) {
             context.startActivity(Intent(context, SearchActivity::class.java))
         }
@@ -60,33 +69,36 @@ class SearchActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.search_menu, menu)
 
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        (menu.findItem(R.id.search).actionView as SearchView).apply {
+        val searchView = menu.findItem(R.id.search).actionView as SearchView
+        searchView.apply {
             setSearchableInfo(searchManager.getSearchableInfo(componentName))
             setQuery("", false)
             requestFocus()
 
+            queryHint = resources.getString(R.string.search_hint)
+
             isIconified = false
 
-            setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(query: String): Boolean {
-                    performSearch(query)
+            forceRemoveSearchIcon(this)
 
-                    hideKeyboard()
-
-                    return true
-                }
-
-                override fun onQueryTextChange(newText: String): Boolean {
-//                    performSearch(newText)
-
-                    return true
-                }
-
-            })
+            RxSearchView.queryTextChanges(this)
+                .debounce(DEBOUNCE_MILLISECONDS, TimeUnit.MILLISECONDS, AndroidSchedulers.mainThread())
+            .subscribe { textEvent ->
+                performSearch(textEvent.toString())
+            }
         }
 
 
         return true
+    }
+
+    private fun forceRemoveSearchIcon(searchView: SearchView) {
+        if (searchView.childCount > 0) {
+            val parent = searchView[0]
+            (parent as ViewGroup).children.forEach { child ->
+                child.background = null
+            }
+        }
     }
 
 }

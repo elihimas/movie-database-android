@@ -14,10 +14,10 @@ interface MoviesDatabaseRetrofit {
     }
 
     @GET("discover/movie")
-    fun listMoviesByGenre(@Query("with_genres") genre: Int, @Query("page") page: Int): Single<ListMoviesResponse>
+    fun listMoviesByGenre(@Query("with_genres") genre: Int, @Query("page") page: Int): Single<MoviesListResponse>
 
     @GET("search/movie")
-    fun searchMovies(@Query("query") query: String, @Query("page") page: Int): Single<ListMoviesResponse>
+    fun searchMovies(@Query("query") query: String, @Query("page") page: Int): Single<MoviesListResponse>
 
     @GET("movie/{movie_id}")
     fun getMovieDetails(@Path(value = "movie_id") movieId: Long): Single<Movie>

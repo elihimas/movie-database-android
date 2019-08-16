@@ -3,7 +3,7 @@
 
     <string name="generic_error">Não foi possível realizar a operação. Por favor, tente novamente mais tarde</string>
 
-    <string name="search_hint">Pesquisar filmes</string>
+    <string name="search_hint">Pesquisar filmes por nome</string>
 
     <string name="tab_genre_action">Ação</string>
     <string name="tab_genre_drama">Drama</string>
