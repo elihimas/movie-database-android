@@ -12,8 +12,6 @@ class MovieDetailsPresenter :
     private val moviesDatabaseRetrofit = APIFactory.createMoviesDatabaseRetrofit()
 
     override fun loadMovie(id: Long) {
-        view?.showLoading()
-
         addDisposable(
             moviesDatabaseRetrofit.getMovieDetails(id)
                 .subscribeOn(Schedulers.io())

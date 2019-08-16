@@ -1,13 +1,13 @@
 package com.elihimas.moviedatabase.presenters
 
 import androidx.paging.PagedList
-import com.elihimas.moviedatabase.contracts.MoviesGenreContract
+import com.elihimas.moviedatabase.contracts.ListMoviesContract
 import com.elihimas.moviedatabase.model.Genre
 import com.elihimas.moviedatabase.model.Movie
 
-class MoviesGenrePresenter :
-    AbstractPresenter<MoviesGenreContract.MoviesGenreView>(),
-    MoviesGenreContract.Presenter {
+class ListMoviesPresenter :
+    AbstractPresenter<ListMoviesContract.MoviesGenreView>(),
+    ListMoviesContract.Presenter {
 
     private val moviesDatabaseRetrofit = APIFactory.createMoviesDatabaseRetrofit()
     private var pagedMoviesDataSourceFactory: PagedMoviesDataSourceFactory? = null
@@ -22,7 +22,7 @@ class MoviesGenrePresenter :
         view?.showError(throwable)
     }
 
-    override fun setGenre(genre: Genre) {
+    override fun loadGenreMovies(genre: Genre) {
         val genreId = genre.getIdOnMoviesDatabase()
         pagedMoviesDataSourceFactory = PagedMoviesDataSourceFactory(
             moviesDatabaseRetrofit,

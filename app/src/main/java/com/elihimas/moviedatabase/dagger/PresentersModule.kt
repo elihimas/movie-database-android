@@ -1,7 +1,7 @@
 package com.elihimas.moviedatabase.dagger
 
 import com.elihimas.moviedatabase.presenters.MovieDetailsPresenter
-import com.elihimas.moviedatabase.presenters.MoviesGenrePresenter
+import com.elihimas.moviedatabase.presenters.ListMoviesPresenter
 import dagger.Module
 import dagger.Provides
 
@@ -10,7 +10,7 @@ class PresentersModule {
 
     @Provides
     fun provideMoviesGenrePresenter() =
-        MoviesGenrePresenter()
+        ListMoviesPresenter()
 
     @Provides
     fun provideMovieDetailsPresenter() =

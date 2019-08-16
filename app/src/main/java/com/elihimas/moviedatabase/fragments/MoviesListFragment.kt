@@ -4,17 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.paging.PagedList
 import com.elihimas.moviedatabase.MoviesDatabaseApplication
 import com.elihimas.moviedatabase.R
 import com.elihimas.moviedatabase.adapters.MoviesAdapter
-import com.elihimas.moviedatabase.contracts.MoviesGenreContract
+import com.elihimas.moviedatabase.contracts.ListMoviesContract
 import com.elihimas.moviedatabase.model.Genre
 import com.elihimas.moviedatabase.model.Movie
 import kotlinx.android.synthetic.main.fragment_movies_list.*
 
-class MoviesListFragment : AbstractView<MoviesGenreContract.Presenter>(), MoviesGenreContract.MoviesGenreView {
+class MoviesListFragment : AbstractView<ListMoviesContract.Presenter>(), ListMoviesContract.MoviesGenreView {
 
     companion object {
         private const val ARG_GENRE = "genre"
@@ -45,7 +44,7 @@ class MoviesListFragment : AbstractView<MoviesGenreContract.Presenter>(), Movies
         super.onViewCreated(view, savedInstanceState)
 
         val genre = arguments?.getSerializable(ARG_GENRE) as Genre?
-        genre?.let { genre -> presenter?.setGenre(genre) }
+        genre?.let { genre -> presenter?.loadGenreMovies(genre) }
 
         items_recycler.adapter = moviesAdapter
     }
