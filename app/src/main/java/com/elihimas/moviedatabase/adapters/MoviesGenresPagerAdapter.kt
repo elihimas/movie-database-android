@@ -12,13 +12,13 @@ class MoviesGenresPagerAdapter(private val context: Context, fm: FragmentManager
     var fragments = mutableListOf<MoviesListFragment>()
 
     override fun getItem(position: Int): Fragment {
-        var item =
+        val fragment =
             fragments.firstOrNull { fragment -> fragment.genre?.ordinal == position }
                 ?: MoviesListFragment.newInstance(Genre.values()[position]).also { fragment ->
                     fragments.add(fragment)
                 }
 
-        return item
+        return fragment
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
