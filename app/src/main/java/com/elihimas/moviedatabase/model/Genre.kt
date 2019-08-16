@@ -20,6 +20,4 @@ enum class Genre {
             FANTASY -> 14
             FICTION -> 878
         }
-
-
 }
