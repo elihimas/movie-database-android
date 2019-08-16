@@ -1,4 +1,4 @@
-package com.elihimas.moviedatabase.api
+package com.elihimas.moviedatabase.apis
 
 import com.elihimas.moviedatabase.model.Movie
 import io.reactivex.Single

@@ -13,7 +13,6 @@ import com.elihimas.moviedatabase.activities.MovieDetailsActivity
 import com.elihimas.moviedatabase.model.Movie
 import kotlinx.android.synthetic.main.movie_item.view.*
 
-const val IMAGES_URL = "https://image.tmdb.org/t/p/w500/"
 
 class MoviesAdapter : PagedListAdapter<Movie, MovieViewHolder>(MoviesDiffCallback()) {
 
@@ -34,8 +33,12 @@ class MoviesAdapter : PagedListAdapter<Movie, MovieViewHolder>(MoviesDiffCallbac
     }
 }
 
-class MovieViewHolder(private val view: View) :
-    RecyclerView.ViewHolder(view) {
+class MovieViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
+
+    private companion object {
+        const val IMAGES_URL = "https://image.tmdb.org/t/p/w342/"
+    }
+
     fun bind(movie: Movie) {
         view.movie_title_text.text = movie.title
 

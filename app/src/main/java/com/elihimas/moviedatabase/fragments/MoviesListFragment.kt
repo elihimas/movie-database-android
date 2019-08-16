@@ -8,13 +8,13 @@ import androidx.paging.PagedList
 import com.elihimas.moviedatabase.MoviesDatabaseApplication
 import com.elihimas.moviedatabase.R
 import com.elihimas.moviedatabase.adapters.MoviesAdapter
-import com.elihimas.moviedatabase.contracts.ListMoviesContract
+import com.elihimas.moviedatabase.contracts.MoviesListContract
 import com.elihimas.moviedatabase.model.Genre
 import com.elihimas.moviedatabase.model.Movie
 import kotlinx.android.synthetic.main.fragment_movies_list.*
 
-class MoviesListFragment(val genre: Genre? = null) : AbstractView<ListMoviesContract.Presenter>(),
-    ListMoviesContract.MoviesGenreView {
+class MoviesListFragment(val genre: Genre? = null) : AbstractView<MoviesListContract.Presenter>(),
+    MoviesListContract.View {
 
     companion object {
         @JvmStatic
@@ -58,10 +58,17 @@ class MoviesListFragment(val genre: Genre? = null) : AbstractView<ListMoviesCont
         }
     }
 
-    override fun showMovies(movies: PagedList<Movie>) {
+    override fun showMovies(pagedMovies: PagedList<Movie>) {
         requireActivity().runOnUiThread {
-            moviesAdapter.submitList(movies)
+            nothing_found_text.visibility = View.GONE
+            moviesAdapter.submitList(pagedMovies)
         }
+    }
+
+    override fun showNothingFound() {
+        items_recycler.visibility = View.GONE
+        progress_bar.visibility = View.GONE
+        nothing_found_text.visibility = View.VISIBLE
     }
 
     fun searchMovies(query: String) {

@@ -14,15 +14,15 @@ import java.util.concurrent.TimeUnit
 abstract class PresentersAbstractTest {
 
     private companion object {
-        const val language = "en"
-        const val country = "US"
+        const val LANGUAGE = "en"
+        const val COUNTRY = "US"
     }
 
     @Before
     open fun setup() {
         MockitoAnnotations.initMocks(this)
 
-        Locale.setDefault(Locale(language, country))
+        Locale.setDefault(Locale(LANGUAGE, COUNTRY))
 
         setupSchedulers()
     }

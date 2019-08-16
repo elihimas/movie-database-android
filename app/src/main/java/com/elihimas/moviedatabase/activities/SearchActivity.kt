@@ -7,9 +7,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.children
@@ -37,23 +34,10 @@ class SearchActivity : AppCompatActivity() {
         setContentView(R.layout.activity_search)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        if (intent.action == Intent.ACTION_SEARCH) {
-            intent.getStringExtra(SearchManager.QUERY)?.also { query ->
-                performSearch(query)
-            }
-        }
     }
 
     private fun performSearch(query: String) {
         (search_fragment as MoviesListFragment).searchMovies(query)
-    }
-
-    private fun hideKeyboard() {
-        currentFocus?.let { currentFocus ->
-            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.hideSoftInputFromWindow(currentFocus.windowToken, 0)
-        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -69,7 +53,8 @@ class SearchActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.search_menu, menu)
 
         val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        val searchView = menu.findItem(R.id.search).actionView as SearchView
+        val menuItem = menu.findItem(R.id.search)
+        val searchView = menuItem.actionView as SearchView
         searchView.apply {
             setSearchableInfo(searchManager.getSearchableInfo(componentName))
             setQuery("", false)
@@ -83,11 +68,10 @@ class SearchActivity : AppCompatActivity() {
 
             RxSearchView.queryTextChanges(this)
                 .debounce(DEBOUNCE_MILLISECONDS, TimeUnit.MILLISECONDS, AndroidSchedulers.mainThread())
-            .subscribe { textEvent ->
-                performSearch(textEvent.toString())
-            }
+                .subscribe { textEvent ->
+                    performSearch(textEvent.toString())
+                }
         }
-
 
         return true
     }

@@ -1,8 +1,6 @@
-package com.elihimas.moviedatabase.presenters
+package com.elihimas.moviedatabase.apis
 
 import androidx.paging.PageKeyedDataSource
-import com.elihimas.moviedatabase.api.MoviesListResponse
-import com.elihimas.moviedatabase.api.MoviesDatabaseRetrofit
 import com.elihimas.moviedatabase.fragments.BaseView
 import com.elihimas.moviedatabase.model.Movie
 import io.reactivex.Single
@@ -15,7 +13,7 @@ class MoviesDataSource private constructor(
     private val moviesDatabaseRetrofit: MoviesDatabaseRetrofit,
     private val compositeDisposable: CompositeDisposable,
     private val view: BaseView?,
-    private val errorCallback: (cause: Throwable) -> Unit
+    private val callbacks: LoadItemsCallbacks
 ) :
     PageKeyedDataSource<Int, Movie>() {
 
@@ -30,26 +28,30 @@ class MoviesDataSource private constructor(
     constructor(
         moviesDatabaseRetrofit: MoviesDatabaseRetrofit,
         compositeDisposable: CompositeDisposable,
-        errorCallback: (cause: Throwable) -> Unit,
+        callbacks: LoadItemsCallbacks,
         view: BaseView?,
         genreId: Int
-    ) : this(moviesDatabaseRetrofit, compositeDisposable, view, errorCallback) {
+    ) : this(moviesDatabaseRetrofit, compositeDisposable, view, callbacks) {
         this.genreId = genreId
     }
 
     constructor(
         moviesDatabaseRetrofit: MoviesDatabaseRetrofit,
         compositeDisposable: CompositeDisposable,
-        errorCallback: (cause: Throwable) -> Unit,
+        callbacks: LoadItemsCallbacks,
         view: BaseView?,
         searchQuery: String
-    ) : this(moviesDatabaseRetrofit, compositeDisposable, view, errorCallback) {
+    ) : this(moviesDatabaseRetrofit, compositeDisposable, view, callbacks) {
         this.searchQuery = searchQuery
     }
 
     override fun loadInitial(params: LoadInitialParams<Int>, loadInitialCallback: LoadInitialCallback<Int, Movie>) {
         loadPage(FIRST_PAGE) { movies ->
             loadInitialCallback.onResult(movies, -1, FIRST_PAGE + 1)
+
+            if (movies.isEmpty() && isValidQuery(searchQuery)) {
+                callbacks.onNothingFound()
+            }
         }
     }
 
@@ -69,7 +71,7 @@ class MoviesDataSource private constructor(
         }
 
         val onFailure = fun(cause: Throwable) {
-            errorCallback(cause)
+            callbacks.onError(cause)
         }
 
         val moviesDatabasePageIndex = zeroBasedPage + 1
@@ -77,10 +79,10 @@ class MoviesDataSource private constructor(
         val moviesDisposable = genreId?.let { genreId ->
             moviesDatabaseRetrofit.listMoviesByGenre(genreId, moviesDatabasePageIndex)
         } ?: searchQuery?.let { searchQuery ->
-            if (searchQuery.length >= MIN_QUERY_LEN) {
+            if (isValidQuery(searchQuery)) {
                 moviesDatabaseRetrofit.searchMovies(searchQuery, moviesDatabasePageIndex)
             } else {
-                Single.just(MoviesListResponse(1, 0, listOf<Movie>()))
+                Single.just(MoviesListResponse(1, 0, listOf()))
             }
         } ?: throw IllegalStateException("nor genreId nor searchQuery defined")
 
@@ -104,6 +106,8 @@ class MoviesDataSource private constructor(
                 .subscribe(onSuccess, onFailure)
         )
     }
+
+    private fun isValidQuery(query: String?) = query != null && query.length >= MIN_QUERY_LEN
 
 
 }

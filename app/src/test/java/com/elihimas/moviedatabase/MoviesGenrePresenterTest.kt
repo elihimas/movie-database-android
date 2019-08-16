@@ -1,6 +1,6 @@
 package com.elihimas.moviedatabase
 
-import com.elihimas.moviedatabase.contracts.ListMoviesContract
+import com.elihimas.moviedatabase.contracts.MoviesListContract
 import com.elihimas.moviedatabase.model.Genre
 import com.elihimas.moviedatabase.presenters.ListMoviesPresenter
 import org.junit.Test
@@ -10,7 +10,7 @@ import org.mockito.Mockito.*
 class MoviesGenrePresenterTest : PresentersAbstractTest() {
 
     @Mock
-    lateinit var view: ListMoviesContract.MoviesGenreView
+    lateinit var view: MoviesListContract.View
 
     @Test
     fun searchMovies_success() {

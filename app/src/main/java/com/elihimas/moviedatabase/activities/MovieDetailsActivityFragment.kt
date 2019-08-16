@@ -12,11 +12,12 @@ import com.elihimas.moviedatabase.fragments.AbstractView
 import com.elihimas.moviedatabase.model.Movie
 import kotlinx.android.synthetic.main.fragment_movie_details.*
 
-
-const val IMAGES_URL = "https://image.tmdb.org/t/p/w500/"
-
 class MovieDetailsActivityFragment : AbstractView<MovieDetailsContract.Presenter>(),
-    MovieDetailsContract.MovieDetailsView {
+    MovieDetailsContract.View {
+
+    private companion object{
+        const val IMAGES_URL = "https://image.tmdb.org/t/p/w500/"
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

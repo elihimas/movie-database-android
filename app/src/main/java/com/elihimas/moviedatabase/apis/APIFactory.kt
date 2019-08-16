@@ -1,6 +1,5 @@
-package com.elihimas.moviedatabase.presenters
+package com.elihimas.moviedatabase.apis
 
-import com.elihimas.moviedatabase.api.MoviesDatabaseRetrofit
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

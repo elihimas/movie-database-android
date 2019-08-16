@@ -10,7 +10,7 @@ import org.mockito.Mockito.*
 class MovieDetailsPresenterTest : PresentersAbstractTest() {
 
     @Mock
-    lateinit var view: MovieDetailsContract.MovieDetailsView
+    lateinit var view: MovieDetailsContract.View
 
     @Test
     fun loadMovie_success() {

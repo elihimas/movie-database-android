@@ -1,9 +1,8 @@
-package com.elihimas.moviedatabase.presenters
+package com.elihimas.moviedatabase.apis
 
 import androidx.paging.DataSource
 import androidx.paging.PagedList
 import androidx.paging.RxPagedListBuilder
-import com.elihimas.moviedatabase.api.MoviesDatabaseRetrofit
 import com.elihimas.moviedatabase.fragments.BaseView
 import com.elihimas.moviedatabase.model.Movie
 import io.reactivex.disposables.CompositeDisposable
@@ -12,7 +11,7 @@ import java.lang.IllegalStateException
 class PagedMoviesDataSourceFactory private constructor(
     private val moviesDatabaseRetrofit: MoviesDatabaseRetrofit,
     private val view: BaseView?,
-    private val errorCallback: (Throwable) -> Unit
+    private val callbacks: LoadItemsCallbacks
 ) :
     DataSource.Factory<Int, Movie>() {
 
@@ -29,8 +28,8 @@ class PagedMoviesDataSourceFactory private constructor(
         moviesDatabaseRetrofit: MoviesDatabaseRetrofit,
         view: BaseView?,
         genreId: Int,
-        errorCallback: (Throwable) -> Unit
-    ) : this(moviesDatabaseRetrofit, view, errorCallback) {
+        callbacks: LoadItemsCallbacks
+    ) : this(moviesDatabaseRetrofit, view, callbacks) {
         this.genreId = genreId
     }
 
@@ -38,8 +37,8 @@ class PagedMoviesDataSourceFactory private constructor(
         moviesDatabaseRetrofit: MoviesDatabaseRetrofit,
         view: BaseView?,
         searchQuery: String,
-        errorCallback: (Throwable) -> Unit
-    ) : this(moviesDatabaseRetrofit, view, errorCallback) {
+        callbacks: LoadItemsCallbacks
+    ) : this(moviesDatabaseRetrofit, view, callbacks) {
         this.searchQuery = searchQuery
     }
 
@@ -56,9 +55,9 @@ class PagedMoviesDataSourceFactory private constructor(
 
     override fun create(): DataSource<Int, Movie> =
         genreId?.let { genreId ->
-            MoviesDataSource(moviesDatabaseRetrofit, compositeDisposable, errorCallback, view, genreId)
+            MoviesDataSource(moviesDatabaseRetrofit, compositeDisposable, callbacks, view, genreId)
         } ?: searchQuery?.let { searchQuery ->
-            MoviesDataSource(moviesDatabaseRetrofit, compositeDisposable, errorCallback, view, searchQuery)
+            MoviesDataSource(moviesDatabaseRetrofit, compositeDisposable, callbacks, view, searchQuery)
         } ?: throw IllegalStateException("nor genreId nor search query defined")
 
     fun onDestroy() {

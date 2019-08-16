@@ -6,12 +6,13 @@ import com.elihimas.moviedatabase.model.Genre
 import com.elihimas.moviedatabase.model.Movie
 import com.elihimas.moviedatabase.presenters.BasePresenter
 
-interface ListMoviesContract {
-    interface MoviesGenreView : BaseView {
+interface MoviesListContract {
+    interface View : BaseView {
         fun showMovies(movies: PagedList<Movie>)
+        fun showNothingFound()
     }
 
-    interface Presenter : BasePresenter<MoviesGenreView> {
+    interface Presenter : BasePresenter<View> {
         fun loadGenreMovies(genre: Genre)
         fun searchMovies(query: String)
     }
