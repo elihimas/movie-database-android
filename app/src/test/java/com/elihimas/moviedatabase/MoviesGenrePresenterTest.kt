@@ -49,7 +49,7 @@ class MoviesGenrePresenterTest : PresentersAbstractTest() {
     }
 
     @Test
-    fun setGenre_wrongId() {
+    fun loadGenre_success() {
         val throwableMock = mock(Throwable::class.java)
         val presenter = ListMoviesPresenter()
         presenter.attach(view)
