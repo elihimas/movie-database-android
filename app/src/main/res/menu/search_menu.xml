@@ -1,6 +1,9 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/search"
           android:title=""
           app:showAsAction="always"
-          app:actionViewClass="androidx.appcompat.widget.SearchView"/>
+          app:actionViewClass="androidx.appcompat.widget.SearchView"
+          app:queryBackground="@android:color/transparent"
+    />
 </menu>

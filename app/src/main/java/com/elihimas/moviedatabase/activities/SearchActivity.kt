@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.children
-import androidx.core.view.get
 import com.elihimas.moviedatabase.R
 import com.elihimas.moviedatabase.fragments.MoviesListFragment
 import com.jakewharton.rxbinding.support.v7.widget.RxSearchView
@@ -64,7 +63,7 @@ class SearchActivity : AppCompatActivity() {
 
             isIconified = false
 
-            forceRemoveSearchIcon(this)
+            forceRemoveAllBackgrounds(this)
 
             RxSearchView.queryTextChanges(this)
                 .debounce(DEBOUNCE_MILLISECONDS, TimeUnit.MILLISECONDS, AndroidSchedulers.mainThread())
@@ -76,11 +75,12 @@ class SearchActivity : AppCompatActivity() {
         return true
     }
 
-    private fun forceRemoveSearchIcon(searchView: SearchView) {
-        if (searchView.childCount > 0) {
-            val parent = searchView[0]
-            (parent as ViewGroup).children.forEach { child ->
-                child.background = null
+    private fun forceRemoveAllBackgrounds(viewGroup: ViewGroup) {
+        viewGroup.children.forEach { child ->
+            child.background = null
+
+            if (child is ViewGroup) {
+                forceRemoveAllBackgrounds(child)
             }
         }
     }
