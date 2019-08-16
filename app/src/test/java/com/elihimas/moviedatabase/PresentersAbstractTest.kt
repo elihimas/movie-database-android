@@ -11,7 +11,7 @@ import java.util.*
 import java.util.concurrent.Executor
 import java.util.concurrent.TimeUnit
 
-abstract class PresentersTest {
+abstract class PresentersAbstractTest {
 
     private companion object {
         const val language = "en"

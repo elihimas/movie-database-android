@@ -13,18 +13,13 @@ import com.elihimas.moviedatabase.model.Genre
 import com.elihimas.moviedatabase.model.Movie
 import kotlinx.android.synthetic.main.fragment_movies_list.*
 
-class MoviesListFragment : AbstractView<ListMoviesContract.Presenter>(), ListMoviesContract.MoviesGenreView {
+class MoviesListFragment(val genre: Genre? = null) : AbstractView<ListMoviesContract.Presenter>(),
+    ListMoviesContract.MoviesGenreView {
 
     companion object {
-        private const val ARG_GENRE = "genre"
-
         @JvmStatic
         fun newInstance(genre: Genre): MoviesListFragment {
-            return MoviesListFragment().apply {
-                arguments = Bundle().apply {
-                    putSerializable(ARG_GENRE, genre)
-                }
-            }
+            return MoviesListFragment(genre)
         }
     }
 
@@ -43,10 +38,8 @@ class MoviesListFragment : AbstractView<ListMoviesContract.Presenter>(), ListMov
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val genre = arguments?.getSerializable(ARG_GENRE) as Genre?
-        genre?.let { genre -> presenter?.loadGenreMovies(genre) }
-
         items_recycler.adapter = moviesAdapter
+        genre?.let { genre -> presenter?.loadGenreMovies(genre) }
     }
 
     override fun createPresenter() = MoviesDatabaseApplication.appComponent.moviesGenrePresenter

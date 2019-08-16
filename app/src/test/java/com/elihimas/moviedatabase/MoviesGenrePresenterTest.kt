@@ -7,7 +7,7 @@ import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito.*
 
-class MoviesGenrePresenterTest : PresentersTest() {
+class MoviesGenrePresenterTest : PresentersAbstractTest() {
 
     @Mock
     lateinit var view: ListMoviesContract.MoviesGenreView

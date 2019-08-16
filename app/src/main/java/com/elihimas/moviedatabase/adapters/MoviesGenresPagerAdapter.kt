@@ -9,8 +9,16 @@ import com.elihimas.moviedatabase.model.Genre
 
 class MoviesGenresPagerAdapter(private val context: Context, fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
+    var fragments = mutableListOf<MoviesListFragment>()
+
     override fun getItem(position: Int): Fragment {
-        return MoviesListFragment.newInstance(Genre.values()[position])
+        var item =
+            fragments.firstOrNull { fragment -> fragment.genre?.ordinal == position }
+                ?: MoviesListFragment.newInstance(Genre.values()[position]).also { fragment ->
+                    fragments.add(fragment)
+                }
+
+        return item
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
