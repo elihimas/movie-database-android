@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.fragment_movie_details.*
 class MovieDetailsActivityFragment : AbstractView<MovieDetailsContract.Presenter>(),
     MovieDetailsContract.View {
 
-    private companion object{
+    private companion object {
         const val IMAGES_URL = "https://image.tmdb.org/t/p/w500/"
     }
 
@@ -29,13 +29,17 @@ class MovieDetailsActivityFragment : AbstractView<MovieDetailsContract.Presenter
     override fun createPresenter() = MoviesDatabaseApplication.appComponent.movieDetailsPresenter
 
     override fun showLoading() {
-        content.visibility = View.GONE
-        progress_bar.visibility = View.VISIBLE
+        requireActivity().runOnUiThread {
+            content.visibility = View.GONE
+            progress_bar.visibility = View.VISIBLE
+        }
     }
 
     override fun hideLoading() {
-        progress_bar.visibility = View.GONE
-        content.visibility = View.VISIBLE
+        requireActivity().runOnUiThread {
+            progress_bar.visibility = View.GONE
+            content.visibility = View.VISIBLE
+        }
     }
 
     override fun showMovie(movie: Movie) {
@@ -44,7 +48,7 @@ class MovieDetailsActivityFragment : AbstractView<MovieDetailsContract.Presenter
         val imageUrl = IMAGES_URL + movie.posterPath
         Glide.with(requireContext())
             .load(imageUrl)
-            .centerCrop()
+            .centerInside()
             .into(poster_image)
     }
 
