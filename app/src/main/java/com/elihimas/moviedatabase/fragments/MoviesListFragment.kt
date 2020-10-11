@@ -38,37 +38,39 @@ class MoviesListFragment(val genre: Genre? = null) : AbstractView<MoviesListCont
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        items_recycler.adapter = moviesAdapter
-        genre?.let { genre -> presenter?.loadGenreMovies(genre) }
+        itemsRecycler.adapter = moviesAdapter
+        genre?.let { genre ->
+            presenter?.loadGenreMovies(genre)
+        }
     }
 
     override fun createPresenter() = MoviesDatabaseApplication.appComponent.moviesGenrePresenter
 
     override fun showLoading() {
         requireActivity().runOnUiThread {
-            items_recycler.visibility = View.GONE
-            progress_bar.visibility = View.VISIBLE
+            itemsRecycler.visibility = View.GONE
+            progress.visibility = View.VISIBLE
         }
     }
 
     override fun hideLoading() {
         requireActivity().runOnUiThread {
-            items_recycler.visibility = View.VISIBLE
-            progress_bar.visibility = View.GONE
+            itemsRecycler.visibility = View.VISIBLE
+            progress.visibility = View.GONE
         }
     }
 
-    override fun showMovies(pagedMovies: PagedList<Movie>) {
+    override fun showMovies(moviesPagedList: PagedList<Movie>) {
         requireActivity().runOnUiThread {
-            nothing_found_text.visibility = View.GONE
-            moviesAdapter.submitList(pagedMovies)
+            nothingFoundText.visibility = View.GONE
+            moviesAdapter.submitList(moviesPagedList)
         }
     }
 
     override fun showNothingFound() {
-        items_recycler.visibility = View.GONE
-        progress_bar.visibility = View.GONE
-        nothing_found_text.visibility = View.VISIBLE
+        itemsRecycler.visibility = View.GONE
+        progress.visibility = View.GONE
+        nothingFoundText.visibility = View.VISIBLE
     }
 
     fun searchMovies(query: String) {

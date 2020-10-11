@@ -13,7 +13,7 @@ object APIFactory {
     private const val API_KEY_PARAMETER = "api_key"
     private const val LANG_PARAMETER = "language"
 
-    fun createMoviesDatabaseRetrofit(): MoviesDatabaseRetrofit {
+    fun createMoviesDatabaseService(): MoviesDatabaseService {
         val gson = GsonBuilder()
             .setLenient()
             .create()
@@ -29,7 +29,7 @@ object APIFactory {
                 val originalRequestUrl = originalRequest.url()
 
                 val updatedUrl = originalRequestUrl.newBuilder()
-                    .addQueryParameter(API_KEY_PARAMETER, MoviesDatabaseRetrofit.API_KEY)
+                    .addQueryParameter(API_KEY_PARAMETER, MoviesDatabaseService.API_KEY)
                     .addQueryParameter(LANG_PARAMETER, language)
                     .build()
 
@@ -38,11 +38,11 @@ object APIFactory {
             }
             .build()
 
-        return Retrofit.Builder().baseUrl(MoviesDatabaseRetrofit.BASE_URL)
+        return Retrofit.Builder().baseUrl(MoviesDatabaseService.BASE_URL)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(client)
-            .build().create(MoviesDatabaseRetrofit::class.java)
+            .build().create(MoviesDatabaseService::class.java)
 
     }
 

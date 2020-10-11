@@ -1,14 +1,15 @@
 package com.elihimas.moviedatabase.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.elihimas.moviedatabase.R
 import com.elihimas.moviedatabase.presenters.BasePresenter
 
-abstract class AbstractView<T : BasePresenter<*>> : Fragment(), BaseView {
+abstract class AbstractView<PresenterType : BasePresenter<*>> : Fragment(), BaseView {
 
-    var presenter: T? = null
+    var presenter: PresenterType? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +30,6 @@ abstract class AbstractView<T : BasePresenter<*>> : Fragment(), BaseView {
         }
     }
 
-    abstract fun createPresenter(): T
+    abstract fun createPresenter(): PresenterType
 
 }

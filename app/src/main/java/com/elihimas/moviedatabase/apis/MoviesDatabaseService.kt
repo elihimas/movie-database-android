@@ -6,7 +6,7 @@ import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface MoviesDatabaseRetrofit {
+interface MoviesDatabaseService {
 
     companion object {
         const val BASE_URL = "https://api.themoviedb.org/3/"

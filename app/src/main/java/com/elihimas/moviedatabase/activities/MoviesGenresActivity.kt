@@ -15,8 +15,8 @@ class MoviesGenresActivity : AppCompatActivity() {
         setContentView(R.layout.activity_movies_genres)
         setSupportActionBar(toolbar)
 
-        movies_genres_pager.adapter = MoviesGenresPagerAdapter(this, supportFragmentManager)
-        tabsGenres.setupWithViewPager(movies_genres_pager)
+        moviesGenresPager.adapter = MoviesGenresPagerAdapter(this, supportFragmentManager)
+        tabsGenres.setupWithViewPager(moviesGenresPager)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

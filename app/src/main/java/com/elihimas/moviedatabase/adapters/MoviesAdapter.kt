@@ -45,7 +45,7 @@ class MovieViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         Glide.with(view.context)
             .load(imageUrl)
             .centerCrop()
-            .into(view.poster_image)
+            .into(view.posterImage)
         view.tag = movie
     }
 

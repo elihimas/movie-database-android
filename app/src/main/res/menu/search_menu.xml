@@ -4,6 +4,5 @@
           android:title=""
           app:showAsAction="always"
           app:actionViewClass="androidx.appcompat.widget.SearchView"
-          app:queryBackground="@android:color/transparent"
-    />
+          app:queryBackground="@android:color/transparent"/>
 </menu>

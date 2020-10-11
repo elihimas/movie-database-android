@@ -10,11 +10,11 @@ class MovieDetailsPresenter :
     AbstractPresenter<MovieDetailsContract.View>(),
     MovieDetailsContract.Presenter {
 
-    private val moviesDatabaseRetrofit = APIFactory.createMoviesDatabaseRetrofit()
+    private val moviesDatabaseService = APIFactory.createMoviesDatabaseService()
 
     override fun loadMovie(id: Long) {
         addDisposable(
-            moviesDatabaseRetrofit.getMovieDetails(id)
+            moviesDatabaseService.getMovieDetails(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe {

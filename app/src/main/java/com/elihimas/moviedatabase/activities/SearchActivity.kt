@@ -36,7 +36,7 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun performSearch(query: String) {
-        (search_fragment as MoviesListFragment).searchMovies(query)
+        (searchFragment as MoviesListFragment).searchMovies(query)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

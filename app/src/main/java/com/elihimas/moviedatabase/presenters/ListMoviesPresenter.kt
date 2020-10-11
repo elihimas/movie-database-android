@@ -13,11 +13,11 @@ class ListMoviesPresenter :
     MoviesListContract.Presenter,
     LoadItemsCallbacks {
 
-    private val moviesDatabaseRetrofit = APIFactory.createMoviesDatabaseRetrofit()
+    private val moviesDatabaseService = APIFactory.createMoviesDatabaseService()
     private var pagedMoviesDataSourceFactory: PagedMoviesDataSourceFactory? = null
 
-    private fun onSuccess(movies: PagedList<Movie>) {
-        view?.showMovies(movies)
+    private fun onSuccess(moviesPagedList: PagedList<Movie>) {
+        view?.showMovies(moviesPagedList)
     }
 
     override fun onNothingFound() {
@@ -31,7 +31,7 @@ class ListMoviesPresenter :
 
     override fun loadGenreMovies(genre: Genre) {
         val genreId = genre.getIdOnMoviesDatabase()
-        pagedMoviesDataSourceFactory = PagedMoviesDataSourceFactory(moviesDatabaseRetrofit, view, genreId, this)
+        pagedMoviesDataSourceFactory = PagedMoviesDataSourceFactory(moviesDatabaseService, view, genreId, this)
             .also { factory ->
                 addDisposable(factory.moviesPagedListObservable.subscribe(::onSuccess))
             }
@@ -39,7 +39,7 @@ class ListMoviesPresenter :
 
 
     override fun searchMovies(query: String) {
-        pagedMoviesDataSourceFactory = PagedMoviesDataSourceFactory(moviesDatabaseRetrofit, view, query, this)
+        pagedMoviesDataSourceFactory = PagedMoviesDataSourceFactory(moviesDatabaseService, view, query, this)
             .also { factory ->
                 addDisposable(factory.moviesPagedListObservable.subscribe(::onSuccess))
             }

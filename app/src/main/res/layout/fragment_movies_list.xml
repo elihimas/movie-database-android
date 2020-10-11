@@ -9,7 +9,7 @@
         android:gravity="center">
 
     <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/items_recycler"
+            android:id="@+id/itemsRecycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="gone"
@@ -18,7 +18,7 @@
             tools:listitem="@layout/movie_item"/>
 
     <ProgressBar
-            android:id="@+id/progress_bar"
+            android:id="@+id/progress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -27,7 +27,7 @@
 
     <TextView
             style="@style/NothingFoundText"
-            android:id="@+id/nothing_found_text"
+            android:id="@+id/nothingFoundText"
             android:text="@string/nothing_found"
             android:visibility="gone"
             android:layout_centerInParent="true"/>

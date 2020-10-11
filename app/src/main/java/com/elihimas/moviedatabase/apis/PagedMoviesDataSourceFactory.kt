@@ -9,7 +9,7 @@ import io.reactivex.disposables.CompositeDisposable
 import java.lang.IllegalStateException
 
 class PagedMoviesDataSourceFactory private constructor(
-    private val moviesDatabaseRetrofit: MoviesDatabaseRetrofit,
+    private val moviesDatabaseService: MoviesDatabaseService,
     private val view: BaseView?,
     private val callbacks: LoadItemsCallbacks
 ) :
@@ -25,20 +25,20 @@ class PagedMoviesDataSourceFactory private constructor(
     private val compositeDisposable = CompositeDisposable()
 
     constructor(
-        moviesDatabaseRetrofit: MoviesDatabaseRetrofit,
+        moviesDatabaseService: MoviesDatabaseService,
         view: BaseView?,
         genreId: Int,
         callbacks: LoadItemsCallbacks
-    ) : this(moviesDatabaseRetrofit, view, callbacks) {
+    ) : this(moviesDatabaseService, view, callbacks) {
         this.genreId = genreId
     }
 
     constructor(
-        moviesDatabaseRetrofit: MoviesDatabaseRetrofit,
+        moviesDatabaseService: MoviesDatabaseService,
         view: BaseView?,
         searchQuery: String,
         callbacks: LoadItemsCallbacks
-    ) : this(moviesDatabaseRetrofit, view, callbacks) {
+    ) : this(moviesDatabaseService, view, callbacks) {
         this.searchQuery = searchQuery
     }
 
@@ -55,9 +55,9 @@ class PagedMoviesDataSourceFactory private constructor(
 
     override fun create(): DataSource<Int, Movie> =
         genreId?.let { genreId ->
-            MoviesDataSource(moviesDatabaseRetrofit, compositeDisposable, callbacks, view, genreId)
+            MoviesDataSource(moviesDatabaseService, compositeDisposable, callbacks, view, genreId)
         } ?: searchQuery?.let { searchQuery ->
-            MoviesDataSource(moviesDatabaseRetrofit, compositeDisposable, callbacks, view, searchQuery)
+            MoviesDataSource(moviesDatabaseService, compositeDisposable, callbacks, view, searchQuery)
         } ?: throw IllegalStateException("nor genreId nor search query defined")
 
     fun onDestroy() {

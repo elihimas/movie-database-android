@@ -43,6 +43,7 @@ abstract class ActivitiesAbstractTest {
 
     fun typeSearchQuery(query: String) {
         onView(ViewMatchers.isAssignableFrom(EditText::class.java)).perform(ViewActions.typeText(query))
+        onView(ViewMatchers.isAssignableFrom(EditText::class.java)).perform(ViewActions.closeSoftKeyboard())
         Thread.sleep(5000)
     }
 }

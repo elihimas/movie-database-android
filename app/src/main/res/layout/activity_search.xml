@@ -23,12 +23,10 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <fragment
-            android:id="@+id/search_fragment"
+            android:id="@+id/searchFragment"
             android:name="com.elihimas.moviedatabase.fragments.MoviesListFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             tools:layout="@layout/fragment_movies_list"/>
-
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

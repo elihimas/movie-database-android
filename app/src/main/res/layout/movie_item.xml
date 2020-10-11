@@ -12,7 +12,7 @@
                   android:layout_height="wrap_content"
                   android:orientation="vertical">
         <ImageView
-                android:id="@+id/poster_image"
+                android:id="@+id/posterImage"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/poster_height_movie_item"
                 tools:src="@tools:sample/backgrounds/scenic"/>

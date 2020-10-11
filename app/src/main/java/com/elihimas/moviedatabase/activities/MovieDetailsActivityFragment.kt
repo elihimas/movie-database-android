@@ -31,13 +31,13 @@ class MovieDetailsActivityFragment : AbstractView<MovieDetailsContract.Presenter
     override fun showLoading() {
         requireActivity().runOnUiThread {
             content.visibility = View.GONE
-            progress_bar.visibility = View.VISIBLE
+            progress.visibility = View.VISIBLE
         }
     }
 
     override fun hideLoading() {
         requireActivity().runOnUiThread {
-            progress_bar.visibility = View.GONE
+            progress.visibility = View.GONE
             content.visibility = View.VISIBLE
         }
     }
@@ -49,7 +49,7 @@ class MovieDetailsActivityFragment : AbstractView<MovieDetailsContract.Presenter
         Glide.with(requireContext())
             .load(imageUrl)
             .centerInside()
-            .into(poster_image)
+            .into(posterImage)
     }
 
     fun loadMovie(movieId: Long) {

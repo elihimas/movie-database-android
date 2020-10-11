@@ -9,12 +9,13 @@ class MoviesGenresTest : ActivitiesAbstractTest() {
 
     @Test
     fun swipeTabs() {
-        isTextVisible("AÇÃO")
-        isTextVisible("DRAMA")
-        isTextVisible("FANTASIA")
-        isTextVisible("FICÇÃO")
+        val genres = listOf("AÇÃO","DRAMA","FANTASIA","FICÇÃO")
 
-        onView(withId(R.id.movies_genres_pager))
+        genres.forEach {
+            isTextVisible(it)
+        }
+
+        onView(withId(R.id.moviesGenresPager))
             .perform(swipeUp())
             .perform(swipeUp())
             .perform(swipeUp())

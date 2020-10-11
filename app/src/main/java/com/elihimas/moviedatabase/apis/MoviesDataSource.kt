@@ -10,7 +10,7 @@ import io.reactivex.schedulers.Schedulers
 import java.lang.IllegalStateException
 
 class MoviesDataSource private constructor(
-    private val moviesDatabaseRetrofit: MoviesDatabaseRetrofit,
+    private val moviesDatabaseService: MoviesDatabaseService,
     private val compositeDisposable: CompositeDisposable,
     private val view: BaseView?,
     private val callbacks: LoadItemsCallbacks
@@ -26,22 +26,22 @@ class MoviesDataSource private constructor(
     private var searchQuery: String? = null
 
     constructor(
-        moviesDatabaseRetrofit: MoviesDatabaseRetrofit,
+        moviesDatabaseService: MoviesDatabaseService,
         compositeDisposable: CompositeDisposable,
         callbacks: LoadItemsCallbacks,
         view: BaseView?,
         genreId: Int
-    ) : this(moviesDatabaseRetrofit, compositeDisposable, view, callbacks) {
+    ) : this(moviesDatabaseService, compositeDisposable, view, callbacks) {
         this.genreId = genreId
     }
 
     constructor(
-        moviesDatabaseRetrofit: MoviesDatabaseRetrofit,
+        moviesDatabaseService: MoviesDatabaseService,
         compositeDisposable: CompositeDisposable,
         callbacks: LoadItemsCallbacks,
         view: BaseView?,
         searchQuery: String
-    ) : this(moviesDatabaseRetrofit, compositeDisposable, view, callbacks) {
+    ) : this(moviesDatabaseService, compositeDisposable, view, callbacks) {
         this.searchQuery = searchQuery
     }
 
@@ -77,10 +77,10 @@ class MoviesDataSource private constructor(
         val moviesDatabasePageIndex = zeroBasedPage + 1
 
         val moviesDisposable = genreId?.let { genreId ->
-            moviesDatabaseRetrofit.listMoviesByGenre(genreId, moviesDatabasePageIndex)
+            moviesDatabaseService.listMoviesByGenre(genreId, moviesDatabasePageIndex)
         } ?: searchQuery?.let { searchQuery ->
             if (isValidQuery(searchQuery)) {
-                moviesDatabaseRetrofit.searchMovies(searchQuery, moviesDatabasePageIndex)
+                moviesDatabaseService.searchMovies(searchQuery, moviesDatabasePageIndex)
             } else {
                 Single.just(MoviesListResponse(1, 0, listOf()))
             }

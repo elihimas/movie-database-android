@@ -18,7 +18,7 @@
                 android:padding="@dimen/movie_details_content_padding">
 
             <ImageView
-                    android:id="@+id/poster_image"
+                    android:id="@+id/posterImage"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
@@ -31,10 +31,10 @@
 
             <TextView
                     style="@style/HeaderText"
-                    android:id="@+id/description_label"
+                    android:id="@+id/descriptionText"
                     android:text="@string/description"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/poster_image"/>
+                    app:layout_constraintTop_toBottomOf="@id/posterImage"/>
 
             <TextView
                     android:id="@+id/description_text"
@@ -42,12 +42,12 @@
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/description_label"/>
+                    app:layout_constraintTop_toBottomOf="@id/descriptionText"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
     <ProgressBar
-            android:id="@+id/progress_bar"
+            android:id="@+id/progress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

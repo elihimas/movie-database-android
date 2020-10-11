@@ -8,7 +8,7 @@ import com.elihimas.moviedatabase.presenters.BasePresenter
 
 interface MoviesListContract {
     interface View : BaseView {
-        fun showMovies(movies: PagedList<Movie>)
+        fun showMovies(moviesPagedList: PagedList<Movie>)
         fun showNothingFound()
     }
 
