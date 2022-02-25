@@ -5,6 +5,7 @@ A simple Android app that displays movies from The Movie Database API
 
 ![Action section](https://github.com/elihimas/movie-database-android/blob/master/screenshots/action-section.png)
 ![Fantasy section](https://github.com/elihimas/movie-database-android/blob/master/screenshots/fantasy-section.png)
+![Movie details](https://github.com/elihimas/movie-database-android/blob/master/screenshots/movie-details.png)
 ![Search section](https://github.com/elihimas/movie-database-android/blob/master/screenshots/search.png)
 
 
