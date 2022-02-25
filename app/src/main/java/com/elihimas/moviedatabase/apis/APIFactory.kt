@@ -43,7 +43,5 @@ object APIFactory {
             .addConverterFactory(GsonConverterFactory.create(gson))
             .client(client)
             .build().create(MoviesDatabaseService::class.java)
-
     }
-
 }

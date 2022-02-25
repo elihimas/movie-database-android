@@ -1,28 +1,27 @@
 package com.elihimas.moviedatabase.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.elihimas.moviedatabase.R
 import com.elihimas.moviedatabase.activities.MovieDetailsActivity
+import com.elihimas.moviedatabase.databinding.MovieItemBinding
 import com.elihimas.moviedatabase.model.Movie
-import kotlinx.android.synthetic.main.movie_item.view.*
 
 
 class MoviesAdapter : PagedListAdapter<Movie, MovieViewHolder>(MoviesDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.movie_item, parent, false)
-        view.setOnClickListener {
-            val movie = view.tag as Movie
-            MovieDetailsActivity.start(view.context, movie.id, movie.title)
+        val inflater = LayoutInflater.from(parent.context)
+        val binding = MovieItemBinding.inflate(inflater, parent, false)
+        binding.root.setOnClickListener {
+            val movie = it.tag as Movie
+            MovieDetailsActivity.start(it.context, movie.id, movie.title)
         }
 
-        return MovieViewHolder(view)
+        return MovieViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
@@ -32,21 +31,21 @@ class MoviesAdapter : PagedListAdapter<Movie, MovieViewHolder>(MoviesDiffCallbac
     }
 }
 
-class MovieViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
+class MovieViewHolder(private val binding: MovieItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
     private companion object {
         const val IMAGES_URL = "https://image.tmdb.org/t/p/w342/"
     }
 
     fun bind(movie: Movie) {
-        view.movie_title_text.text = movie.title
+        binding.movieTitleText.text = movie.title
 
         val imageUrl = IMAGES_URL + movie.posterPath
-        Glide.with(view.context)
+        Glide.with(binding.root.context)
             .load(imageUrl)
             .centerCrop()
-            .into(view.posterImage)
-        view.tag = movie
+            .into(binding.posterImage)
+        binding.root.tag = movie
     }
 
 }

@@ -6,53 +6,55 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.elihimas.moviedatabase.MoviesDatabaseApplication
-import com.elihimas.moviedatabase.R
 import com.elihimas.moviedatabase.contracts.MovieDetailsContract
+import com.elihimas.moviedatabase.databinding.FragmentMovieDetailsBinding
 import com.elihimas.moviedatabase.fragments.AbstractView
 import com.elihimas.moviedatabase.model.Movie
-import kotlinx.android.synthetic.main.fragment_movie_details.*
 
 class MovieDetailsActivityFragment : AbstractView<MovieDetailsContract.Presenter>(),
     MovieDetailsContract.View {
 
-    private companion object {
-        const val IMAGES_URL = "https://image.tmdb.org/t/p/w500/"
-    }
+    private lateinit var binding: FragmentMovieDetailsBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_movie_details, container, false)
+    ): View {
+        binding = FragmentMovieDetailsBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun createPresenter() = MoviesDatabaseApplication.appComponent.movieDetailsPresenter
 
     override fun showLoading() {
         requireActivity().runOnUiThread {
-            content.visibility = View.GONE
-            progress.visibility = View.VISIBLE
+            binding.content.visibility = View.GONE
+            binding.progress.visibility = View.VISIBLE
         }
     }
 
     override fun hideLoading() {
         requireActivity().runOnUiThread {
-            progress.visibility = View.GONE
-            content.visibility = View.VISIBLE
+            binding.progress.visibility = View.GONE
+            binding.content.visibility = View.VISIBLE
         }
     }
 
     override fun showMovie(movie: Movie) {
-        description_text.text = movie.overview
+        binding.descriptionText.text = movie.overview
 
         val imageUrl = IMAGES_URL + movie.posterPath
         Glide.with(requireContext())
             .load(imageUrl)
             .centerInside()
-            .into(posterImage)
+            .into(binding.posterImage)
     }
 
     fun loadMovie(movieId: Long) {
         presenter?.loadMovie(movieId)
+    }
+
+    private companion object {
+        const val IMAGES_URL = "https://image.tmdb.org/t/p/w500/"
     }
 }

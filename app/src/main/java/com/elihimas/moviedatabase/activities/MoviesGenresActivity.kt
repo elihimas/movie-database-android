@@ -6,17 +6,24 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.elihimas.moviedatabase.R
 import com.elihimas.moviedatabase.adapters.MoviesGenresPagerAdapter
-import kotlinx.android.synthetic.main.activity_movies_genres.*
+import com.elihimas.moviedatabase.databinding.ActivityMoviesGenresBinding
 
 class MoviesGenresActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMoviesGenresBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_movies_genres)
-        setSupportActionBar(toolbar)
 
-        moviesGenresPager.adapter = MoviesGenresPagerAdapter(this, supportFragmentManager)
-        tabsGenres.setupWithViewPager(moviesGenresPager)
+        binding = ActivityMoviesGenresBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
+
+        with(binding) {
+            moviesGenresPager.adapter =
+                MoviesGenresPagerAdapter(this@MoviesGenresActivity, supportFragmentManager)
+            tabsGenres.setupWithViewPager(moviesGenresPager)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

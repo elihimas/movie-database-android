@@ -6,11 +6,40 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.elihimas.moviedatabase.R
-
-import kotlinx.android.synthetic.main.activity_movie_details.*
-import kotlinx.android.synthetic.main.content_movie_details.*
+import com.elihimas.moviedatabase.databinding.ActivityMovieDetailsBinding
 
 class MovieDetailsActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMovieDetailsBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        binding = ActivityMovieDetailsBinding.inflate(layoutInflater)
+
+        setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        val movieId = intent.getLongExtra(ARG_MOVIE_ID, -1)
+        val movieTitle = intent.getStringExtra(ARG_MOVIE_TITLE)
+
+        supportActionBar?.title = movieTitle
+
+        val detailsFragment =
+            supportFragmentManager.findFragmentById(R.id.fragment) as MovieDetailsActivityFragment
+        detailsFragment.loadMovie(movieId)
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return if (item.itemId == android.R.id.home) {
+            finish()
+            true
+        } else {
+            super.onOptionsItemSelected(item)
+        }
+    }
 
     companion object {
         private const val ARG_MOVIE_ID = "movieId"
@@ -23,29 +52,5 @@ class MovieDetailsActivity : AppCompatActivity() {
             })
         }
 
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_movie_details)
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        val movieId = intent.getLongExtra(ARG_MOVIE_ID, -1)
-        val movieTitle = intent.getStringExtra(ARG_MOVIE_TITLE)
-
-        supportActionBar?.title = movieTitle
-
-        (fragment as MovieDetailsActivityFragment).loadMovie(movieId)
-    }
-
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return if (item.itemId == android.R.id.home) {
-            finish()
-            true
-        } else {
-            super.onOptionsItemSelected(item)
-        }
     }
 }

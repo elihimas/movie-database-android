@@ -6,37 +6,37 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.children
 import com.elihimas.moviedatabase.R
+import com.elihimas.moviedatabase.databinding.ActivitySearchBinding
 import com.elihimas.moviedatabase.fragments.MoviesListFragment
 import com.jakewharton.rxbinding.support.v7.widget.RxSearchView
-import kotlinx.android.synthetic.main.activity_search.*
 import rx.android.schedulers.AndroidSchedulers
 import java.util.concurrent.TimeUnit
 
 
 class SearchActivity : AppCompatActivity() {
 
-    companion object {
-        private const val DEBOUNCE_MILLISECONDS = 500L
-
-        fun start(context: Context) {
-            context.startActivity(Intent(context, SearchActivity::class.java))
-        }
-    }
+    private lateinit var binding: ActivitySearchBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_search)
-        setSupportActionBar(toolbar)
+
+        binding = ActivitySearchBinding.inflate(layoutInflater)
+
+        setContentView(binding.root)
+        setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     private fun performSearch(query: String) {
-        (searchFragment as MoviesListFragment).searchMovies(query)
+        val searchFragment =
+            supportFragmentManager.findFragmentById(R.id.searchFragment) as MoviesListFragment
+        searchFragment.searchMovies(query)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -82,6 +82,14 @@ class SearchActivity : AppCompatActivity() {
             if (child is ViewGroup) {
                 forceRemoveAllBackgrounds(child)
             }
+        }
+    }
+
+    companion object {
+        private const val DEBOUNCE_MILLISECONDS = 500L
+
+        fun start(context: Context) {
+            context.startActivity(Intent(context, SearchActivity::class.java))
         }
     }
 
