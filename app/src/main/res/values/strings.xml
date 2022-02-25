@@ -3,6 +3,7 @@
 
     <string name="generic_error">Não foi possível realizar a operação. Por favor, tente novamente mais tarde</string>
 
+    <string name="search">Pesquisa de filmes</string>
     <string name="search_hint">Pesquisar filmes por nome</string>
     <string name="nothing_found">Nenhum filme encontrado :(</string>
 
@@ -11,4 +12,6 @@
     <string name="tab_genre_fantasy">Fantasia</string>
     <string name="tab_genre_fiction">Ficção</string>
     <string name="description">Descrição</string>
+
+    <string name="description_poster">Poster do filme</string>
 </resources>

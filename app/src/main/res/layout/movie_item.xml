@@ -1,24 +1,27 @@
-<androidx.cardview.widget.CardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    card_view:cardBackgroundColor="@android:color/white"
+    card_view:cardElevation="4dp"
+    card_view:cardUseCompatPadding="true">
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        card_view:cardBackgroundColor="@android:color/white"
-        card_view:cardElevation="4dp"
-        card_view:cardUseCompatPadding="true">
+        android:orientation="vertical">
 
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:orientation="vertical">
         <ImageView
-                android:id="@+id/posterImage"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/poster_height_movie_item"
-                tools:src="@tools:sample/backgrounds/scenic"/>
+            android:id="@+id/posterImage"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/poster_height_movie_item"
+            android:contentDescription="@string/description_poster"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
         <TextView
-                android:id="@+id/movie_title_text"
-                style="@style/MovieTitle"
-                tools:text="Mad Max"/>
+            android:id="@+id/movie_title_text"
+            style="@style/MovieTitle"
+            tools:text="Mad Max" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>
