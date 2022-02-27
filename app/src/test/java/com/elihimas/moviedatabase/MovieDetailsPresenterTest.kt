@@ -1,8 +1,6 @@
 package com.elihimas.moviedatabase
 
-import com.elihimas.moviedatabase.contracts.MovieDetailsContract
 import com.elihimas.moviedatabase.model.Movie
-import com.elihimas.moviedatabase.presenters.MovieDetailsPresenter
 import com.nhaarman.mockitokotlin2.capture
 import org.junit.Test
 import org.mockito.ArgumentCaptor

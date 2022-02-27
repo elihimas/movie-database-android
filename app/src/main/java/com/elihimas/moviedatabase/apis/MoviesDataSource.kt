@@ -8,7 +8,6 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import java.lang.IllegalStateException
 
 class MoviesDataSource private constructor(
     private val moviesDatabaseService: MoviesDatabaseService,

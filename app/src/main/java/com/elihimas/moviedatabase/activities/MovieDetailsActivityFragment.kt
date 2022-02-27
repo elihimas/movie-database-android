@@ -4,17 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
-import com.elihimas.moviedatabase.MoviesDatabaseApplication
-import com.elihimas.moviedatabase.contracts.MovieDetailsContract
 import com.elihimas.moviedatabase.databinding.FragmentMovieDetailsBinding
-import com.elihimas.moviedatabase.fragments.AbstractView
+import com.elihimas.moviedatabase.fragments.BaseFragment
 import com.elihimas.moviedatabase.model.Movie
+import com.elihimas.moviedatabase.viewmodels.MovieDetailsViewModel
+import com.elihimas.moviedatabase.viewmodels.states.MovieDetailsState
 
-class MovieDetailsActivityFragment : AbstractView<MovieDetailsContract.Presenter>(),
-    MovieDetailsContract.View {
+class MovieDetailsActivityFragment : BaseFragment() {
 
     private lateinit var binding: FragmentMovieDetailsBinding
+    private val viewModel by activityViewModels<MovieDetailsViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -24,7 +25,19 @@ class MovieDetailsActivityFragment : AbstractView<MovieDetailsContract.Presenter
         return binding.root
     }
 
-    override fun createPresenter() = MoviesDatabaseApplication.appComponent.movieDetailsPresenter
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel.currentState().observe(viewLifecycleOwner, ::render)
+    }
+
+    private fun render(movieDetailsState: MovieDetailsState) {
+        when (movieDetailsState) {
+            MovieDetailsState.LoadingState -> showLoading()
+            is MovieDetailsState.LoadErrorState -> showError(movieDetailsState.cause)
+            is MovieDetailsState.MovieLoadedState -> showMovie(movieDetailsState.movie)
+        }
+    }
 
     override fun showLoading() {
         requireActivity().runOnUiThread {
@@ -40,7 +53,8 @@ class MovieDetailsActivityFragment : AbstractView<MovieDetailsContract.Presenter
         }
     }
 
-    override fun showMovie(movie: Movie) {
+    private fun showMovie(movie: Movie) {
+        hideLoading()
         binding.descriptionText.text = movie.overview
 
         val imageUrl = IMAGES_URL + movie.posterPath
@@ -48,10 +62,6 @@ class MovieDetailsActivityFragment : AbstractView<MovieDetailsContract.Presenter
             .load(imageUrl)
             .centerInside()
             .into(binding.posterImage)
-    }
-
-    fun loadMovie(movieId: Long) {
-        presenter?.loadMovie(movieId)
     }
 
     private companion object {
