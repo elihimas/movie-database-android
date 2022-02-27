@@ -2,6 +2,7 @@ package com.elihimas.moviedatabase.apis
 
 import androidx.paging.PageKeyedDataSource
 import com.elihimas.moviedatabase.fragments.BaseView
+import com.elihimas.moviedatabase.isValidQuery
 import com.elihimas.moviedatabase.model.Movie
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -17,10 +18,11 @@ class MoviesDataSource private constructor(
 ) :
     PageKeyedDataSource<Int, Movie>() {
 
-    private companion object {
-        const val FIRST_PAGE = 0
+    companion object {
+        private const val FIRST_PAGE = 0
         const val MIN_QUERY_LEN = 3
     }
+
 
     private var genreId: Int? = null
     private var searchQuery: String? = null
@@ -45,11 +47,14 @@ class MoviesDataSource private constructor(
         this.searchQuery = searchQuery
     }
 
-    override fun loadInitial(params: LoadInitialParams<Int>, loadInitialCallback: LoadInitialCallback<Int, Movie>) {
+    override fun loadInitial(
+        params: LoadInitialParams<Int>,
+        loadInitialCallback: LoadInitialCallback<Int, Movie>
+    ) {
         loadPage(FIRST_PAGE) { movies ->
             loadInitialCallback.onResult(movies, -1, FIRST_PAGE + 1)
 
-            if (movies.isEmpty() && isValidQuery(searchQuery)) {
+            if (movies.isEmpty() && searchQuery.isValidQuery()) {
                 callbacks.onNothingFound()
             }
         }
@@ -79,7 +84,7 @@ class MoviesDataSource private constructor(
         val moviesDisposable = genreId?.let { genreId ->
             moviesDatabaseService.listMoviesByGenre(genreId, moviesDatabasePageIndex)
         } ?: searchQuery?.let { searchQuery ->
-            if (isValidQuery(searchQuery)) {
+            if (searchQuery.isValidQuery()) {
                 moviesDatabaseService.searchMovies(searchQuery, moviesDatabasePageIndex)
             } else {
                 Single.just(MoviesListResponse(1, 0, listOf()))
@@ -106,8 +111,5 @@ class MoviesDataSource private constructor(
                 .subscribe(onSuccess, onFailure)
         )
     }
-
-    private fun isValidQuery(query: String?) = query != null && query.length >= MIN_QUERY_LEN
-
 
 }

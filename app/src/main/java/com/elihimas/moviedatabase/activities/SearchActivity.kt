@@ -30,6 +30,8 @@ class SearchActivity : AppCompatActivity() {
 
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
+
+        supportActionBar?.setTitle(R.string.search)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 

@@ -11,7 +11,7 @@ class SearchMovieTest : ActivitiesAbstractTest() {
 
     @Test
     fun searchMovie_nothingFound() {
-        val wrongMatrixName = "matrixx"
+        val wrongMatrixName = "matrixxx"
 
         goToSearch()
         typeSearchQuery(wrongMatrixName)

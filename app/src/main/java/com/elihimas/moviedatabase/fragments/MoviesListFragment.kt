@@ -43,15 +43,20 @@ class MoviesListFragment(val genre: Genre? = null) : AbstractView<MoviesListCont
 
     override fun showLoading() {
         requireActivity().runOnUiThread {
-            binding.itemsRecycler.visibility = View.GONE
-            binding.progress.visibility = View.VISIBLE
+            with(binding) {
+                itemsRecycler.visibility = View.GONE
+                nothingFoundText.visibility = View.GONE
+                progress.visibility = View.VISIBLE
+            }
         }
     }
 
     override fun hideLoading() {
         requireActivity().runOnUiThread {
-            binding.itemsRecycler.visibility = View.VISIBLE
-            binding.progress.visibility = View.GONE
+            with(binding) {
+                itemsRecycler.visibility = View.VISIBLE
+                progress.visibility = View.GONE
+            }
         }
     }
 
@@ -63,15 +68,16 @@ class MoviesListFragment(val genre: Genre? = null) : AbstractView<MoviesListCont
     }
 
     override fun showNothingFound() {
-        binding.itemsRecycler.visibility = View.GONE
-        binding.progress.visibility = View.GONE
-        binding.nothingFoundText.visibility = View.VISIBLE
+        with(binding) {
+            itemsRecycler.visibility = View.GONE
+            progress.visibility = View.GONE
+            nothingFoundText.visibility = View.VISIBLE
+        }
     }
 
     fun searchMovies(query: String) {
         presenter?.searchMovies(query)
     }
-
 
     companion object {
         @JvmStatic
