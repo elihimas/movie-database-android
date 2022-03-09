@@ -1,5 +1,5 @@
 # movie-database-android
-A simple Android app that displays movies from The Movie Database API
+A simple Android app that displays movies from The Movie Database API. Currently this app is being updated.
 
 ### Screenshots: ###
 
