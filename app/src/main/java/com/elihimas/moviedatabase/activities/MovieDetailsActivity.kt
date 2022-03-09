@@ -6,14 +6,24 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.elihimas.moviedatabase.R
+import com.elihimas.moviedatabase.apis.APIFactory
 import com.elihimas.moviedatabase.databinding.ActivityMovieDetailsBinding
 import com.elihimas.moviedatabase.viewmodels.MovieDetailsViewModel
 
 class MovieDetailsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMovieDetailsBinding
-    private val viewModel by viewModels<MovieDetailsViewModel>()
+    private val viewModel by viewModels<MovieDetailsViewModel> {
+        object : ViewModelProvider.Factory {
+            override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+                return MovieDetailsViewModel(APIFactory.createMoviesDatabaseService()) as T
+            }
+
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

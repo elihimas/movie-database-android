@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.elihimas.moviedatabase.apis.APIFactory
+import com.elihimas.moviedatabase.apis.MoviesDatabaseService
 import com.elihimas.moviedatabase.model.Movie
 import com.elihimas.moviedatabase.viewmodels.states.MovieDetailsState
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -14,11 +15,10 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MovieDetailsViewModel : ViewModel() {
+class MovieDetailsViewModel(private val moviesDatabaseService: MoviesDatabaseService) : ViewModel() {
 
     private val currentState = MutableLiveData<MovieDetailsState>(MovieDetailsState.LoadingState)
 
-    private val moviesDatabaseService = APIFactory.createMoviesDatabaseService()
     private val compositeDisposable = CompositeDisposable()
 
     fun currentState(): LiveData<MovieDetailsState> = currentState
