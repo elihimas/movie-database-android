@@ -1,4 +1,4 @@
-package com.elihimas.moviedatabase.activities
+package com.elihimas.moviedatabase.ui.activities
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
 import com.elihimas.moviedatabase.databinding.FragmentMovieDetailsBinding
-import com.elihimas.moviedatabase.fragments.BaseFragment
+import com.elihimas.moviedatabase.ui.fragments.BaseFragment
 import com.elihimas.moviedatabase.model.Movie
 import com.elihimas.moviedatabase.viewmodels.MovieDetailsViewModel
 import com.elihimas.moviedatabase.viewmodels.states.MovieDetailsState

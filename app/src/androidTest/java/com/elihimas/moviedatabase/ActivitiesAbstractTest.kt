@@ -13,7 +13,7 @@ import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.runner.AndroidJUnit4
-import com.elihimas.moviedatabase.activities.MoviesGenresActivity
+import com.elihimas.moviedatabase.ui.activities.MoviesGenresActivity
 import org.hamcrest.CoreMatchers
 import org.junit.Before
 import org.junit.Rule

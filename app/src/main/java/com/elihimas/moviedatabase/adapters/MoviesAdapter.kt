@@ -6,7 +6,7 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.elihimas.moviedatabase.activities.MovieDetailsActivity
+import com.elihimas.moviedatabase.ui.activities.MovieDetailsActivity
 import com.elihimas.moviedatabase.databinding.MovieItemBinding
 import com.elihimas.moviedatabase.model.Movie
 

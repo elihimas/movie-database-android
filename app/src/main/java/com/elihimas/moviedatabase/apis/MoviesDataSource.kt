@@ -1,7 +1,7 @@
 package com.elihimas.moviedatabase.apis
 
 import androidx.paging.PageKeyedDataSource
-import com.elihimas.moviedatabase.fragments.BaseView
+import com.elihimas.moviedatabase.ui.fragments.BaseView
 import com.elihimas.moviedatabase.isValidQuery
 import com.elihimas.moviedatabase.model.Movie
 import io.reactivex.Single

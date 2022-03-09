@@ -1,7 +1,7 @@
 package com.elihimas.moviedatabase.contracts
 
 import androidx.paging.PagedList
-import com.elihimas.moviedatabase.fragments.BaseView
+import com.elihimas.moviedatabase.ui.fragments.BaseView
 import com.elihimas.moviedatabase.model.Genre
 import com.elihimas.moviedatabase.model.Movie
 import com.elihimas.moviedatabase.presenters.BasePresenter

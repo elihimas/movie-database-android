@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.SearchActivity">
+    tools:context=".ui.activities.SearchActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/searchFragment"
-        android:name="com.elihimas.moviedatabase.fragments.MoviesListFragment"
+        android:name="com.elihimas.moviedatabase.ui.fragments.MoviesListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"

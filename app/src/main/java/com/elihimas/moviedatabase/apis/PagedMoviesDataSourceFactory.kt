@@ -3,7 +3,7 @@ package com.elihimas.moviedatabase.apis
 import androidx.paging.DataSource
 import androidx.paging.PagedList
 import androidx.paging.RxPagedListBuilder
-import com.elihimas.moviedatabase.fragments.BaseView
+import com.elihimas.moviedatabase.ui.fragments.BaseView
 import com.elihimas.moviedatabase.model.Movie
 import io.reactivex.disposables.CompositeDisposable
 import java.lang.IllegalStateException

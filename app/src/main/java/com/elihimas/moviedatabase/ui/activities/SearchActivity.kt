@@ -1,4 +1,4 @@
-package com.elihimas.moviedatabase.activities
+package com.elihimas.moviedatabase.ui.activities
 
 import android.app.SearchManager
 import android.content.Context
@@ -6,14 +6,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.children
 import com.elihimas.moviedatabase.R
 import com.elihimas.moviedatabase.databinding.ActivitySearchBinding
-import com.elihimas.moviedatabase.fragments.MoviesListFragment
+import com.elihimas.moviedatabase.ui.fragments.MoviesListFragment
 import com.jakewharton.rxbinding.support.v7.widget.RxSearchView
 import rx.android.schedulers.AndroidSchedulers
 import java.util.concurrent.TimeUnit

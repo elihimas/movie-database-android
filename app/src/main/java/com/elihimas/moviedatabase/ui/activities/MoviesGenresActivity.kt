@@ -1,4 +1,4 @@
-package com.elihimas.moviedatabase.activities
+package com.elihimas.moviedatabase.ui.activities
 
 import android.os.Bundle
 import android.view.Menu

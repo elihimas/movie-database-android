@@ -16,13 +16,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activities.MovieDetailsActivity"
+            android:name="com.elihimas.moviedatabase.ui.activities.MovieDetailsActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activities.SearchActivity"
+            android:name="com.elihimas.moviedatabase.ui.activities.SearchActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activities.MoviesGenresActivity"
+            android:name="com.elihimas.moviedatabase.ui.activities.MoviesGenresActivity"
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

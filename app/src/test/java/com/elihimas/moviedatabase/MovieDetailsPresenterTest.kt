@@ -24,8 +24,8 @@ class MovieDetailsPresenterTest : PresentersAbstractTest() {
     @get:Rule
     var rule: TestRule = InstantTaskExecutorRule()
 
-    val service = mock(MoviesDatabaseService::class.java)
-    val viewModel = MovieDetailsViewModel(service)
+    private val service = mock(MoviesDatabaseService::class.java)
+    private val viewModel = MovieDetailsViewModel(service)
 
 
     @Before

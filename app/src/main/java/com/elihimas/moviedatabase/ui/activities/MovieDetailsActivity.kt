@@ -1,4 +1,4 @@
-package com.elihimas.moviedatabase.activities
+package com.elihimas.moviedatabase.ui.activities
 
 import android.content.Context
 import android.content.Intent
@@ -8,7 +8,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.elihimas.moviedatabase.R
 import com.elihimas.moviedatabase.apis.APIFactory
 import com.elihimas.moviedatabase.databinding.ActivityMovieDetailsBinding
 import com.elihimas.moviedatabase.viewmodels.MovieDetailsViewModel

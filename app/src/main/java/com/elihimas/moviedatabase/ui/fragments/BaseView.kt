@@ -1,4 +1,4 @@
-package com.elihimas.moviedatabase.fragments
+package com.elihimas.moviedatabase.ui.fragments
 
 interface BaseView {
 

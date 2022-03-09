@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.elihimas.moviedatabase.fragments.MoviesListFragment
+import com.elihimas.moviedatabase.ui.fragments.MoviesListFragment
 import com.elihimas.moviedatabase.model.Genre
 
 class MoviesGenresPagerAdapter(private val context: Context, fm: FragmentManager) : FragmentPagerAdapter(fm) {
