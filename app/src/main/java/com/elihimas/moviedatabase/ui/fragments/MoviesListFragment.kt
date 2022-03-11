@@ -4,79 +4,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.paging.PagedList
-import com.elihimas.moviedatabase.MoviesDatabaseApplication
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.PagingData
 import com.elihimas.moviedatabase.adapters.MoviesAdapter
-import com.elihimas.moviedatabase.contracts.MoviesListContract
 import com.elihimas.moviedatabase.databinding.FragmentMoviesListBinding
 import com.elihimas.moviedatabase.model.Genre
 import com.elihimas.moviedatabase.model.Movie
+import com.elihimas.moviedatabase.viewmodels.MoviesListViewModel
+import com.elihimas.moviedatabase.viewmodels.states.MoviesListState
+import kotlinx.coroutines.launch
 
-class MoviesListFragment(val genre: Genre? = null) : AbstractView<MoviesListContract.Presenter>(),
-    MoviesListContract.View {
-
-    private lateinit var binding: FragmentMoviesListBinding
-
-    private val moviesAdapter by lazy {
-        MoviesAdapter()
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentMoviesListBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+class MoviesListFragment(val genre: Genre) : AbstractMoviesListFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.itemsRecycler.adapter = moviesAdapter
-        genre?.let { genre ->
-            presenter?.loadGenreMovies(genre)
-        }
-    }
-
-    override fun createPresenter() = MoviesDatabaseApplication.appComponent.moviesGenrePresenter
-
-    override fun showLoading() {
-        requireActivity().runOnUiThread {
-            with(binding) {
-                itemsRecycler.visibility = View.GONE
-                nothingFoundText.visibility = View.GONE
-                progress.visibility = View.VISIBLE
-            }
-        }
-    }
-
-    override fun hideLoading() {
-        requireActivity().runOnUiThread {
-            with(binding) {
-                itemsRecycler.visibility = View.VISIBLE
-                progress.visibility = View.GONE
-            }
-        }
-    }
-
-    override fun showMovies(moviesPagedList: PagedList<Movie>) {
-        requireActivity().runOnUiThread {
-            binding.nothingFoundText.visibility = View.GONE
-            moviesAdapter.submitList(moviesPagedList)
-        }
-    }
-
-    override fun showNothingFound() {
-        with(binding) {
-            itemsRecycler.visibility = View.GONE
-            progress.visibility = View.GONE
-            nothingFoundText.visibility = View.VISIBLE
-        }
-    }
-
-    fun searchMovies(query: String) {
-        presenter?.searchMovies(query)
+        viewModel.loadGenreMovies(genre)
     }
 
     companion object {

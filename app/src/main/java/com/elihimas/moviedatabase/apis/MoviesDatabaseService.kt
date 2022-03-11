@@ -14,10 +14,16 @@ interface MoviesDatabaseService {
     }
 
     @GET("discover/movie")
-    fun listMoviesByGenre(@Query("with_genres") genre: Int, @Query("page") page: Int): Single<MoviesListResponse>
+    suspend fun listMoviesByGenre(
+        @Query("with_genres") genre: Int,
+        @Query("page") page: Long
+    ): MoviesListResponse
 
     @GET("search/movie")
-    fun searchMovies(@Query("query") query: String, @Query("page") page: Int): Single<MoviesListResponse>
+    suspend fun searchMovies(
+        @Query("query") query: String,
+        @Query("page") page: Long
+    ): MoviesListResponse
 
     @GET("movie/{movie_id}")
     fun getMovieDetails(@Path(value = "movie_id") movieId: Long): Single<Movie>

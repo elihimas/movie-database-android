@@ -1,5 +1,5 @@
 package com.elihimas.moviedatabase
 
-import com.elihimas.moviedatabase.apis.MoviesDataSource
+const val MIN_QUERY_LEN = 3
 
-fun String?.isValidQuery() = this != null && this.length >= MoviesDataSource.MIN_QUERY_LEN
+fun String?.isValidQuery() = this != null && this.length >= MIN_QUERY_LEN

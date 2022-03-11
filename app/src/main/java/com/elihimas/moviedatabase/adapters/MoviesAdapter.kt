@@ -2,16 +2,16 @@ package com.elihimas.moviedatabase.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.paging.PagedListAdapter
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.elihimas.moviedatabase.ui.activities.MovieDetailsActivity
 import com.elihimas.moviedatabase.databinding.MovieItemBinding
 import com.elihimas.moviedatabase.model.Movie
+import com.elihimas.moviedatabase.ui.activities.MovieDetailsActivity
 
 
-class MoviesAdapter : PagedListAdapter<Movie, MovieViewHolder>(MoviesDiffCallback()) {
+class MoviesAdapter : PagingDataAdapter<Movie, MovieViewHolder>(MoviesDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
         val inflater = LayoutInflater.from(parent.context)

@@ -22,7 +22,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/searchFragment"
-        android:name="com.elihimas.moviedatabase.ui.fragments.MoviesListFragment"
+        android:name="com.elihimas.moviedatabase.ui.fragments.SearchMoviesFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"

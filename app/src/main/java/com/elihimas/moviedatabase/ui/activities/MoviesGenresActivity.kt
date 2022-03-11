@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.elihimas.moviedatabase.R
 import com.elihimas.moviedatabase.adapters.MoviesGenresPagerAdapter
 import com.elihimas.moviedatabase.databinding.ActivityMoviesGenresBinding
+import com.elihimas.moviedatabase.model.Genre
+import com.google.android.material.tabs.TabLayoutMediator
 
 class MoviesGenresActivity : AppCompatActivity() {
 
@@ -21,8 +23,12 @@ class MoviesGenresActivity : AppCompatActivity() {
 
         with(binding) {
             moviesGenresPager.adapter =
-                MoviesGenresPagerAdapter(this@MoviesGenresActivity, supportFragmentManager)
-            tabsGenres.setupWithViewPager(moviesGenresPager)
+                MoviesGenresPagerAdapter(this@MoviesGenresActivity)
+            TabLayoutMediator(tabsGenres, moviesGenresPager) { tab, position ->
+                val tabGenre = Genre.values()[position]
+                val tabText = getString(tabGenre.getTitleResId())
+                tab.text = tabText
+            }.attach()
         }
     }
 
@@ -33,12 +39,11 @@ class MoviesGenresActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem) =
-        when (item.itemId) {
-            R.id.action_search -> {
-                startSearchActivity()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
+        if (item.itemId == R.id.action_search) {
+            startSearchActivity()
+            true
+        } else {
+            super.onOptionsItemSelected(item)
         }
 
 

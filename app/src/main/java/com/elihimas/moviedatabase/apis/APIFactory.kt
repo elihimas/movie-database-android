@@ -26,7 +26,7 @@ object APIFactory {
             })
             .addInterceptor { chain ->
                 val originalRequest = chain.request()
-                val originalRequestUrl = originalRequest.url()
+                val originalRequestUrl = originalRequest.url
 
                 val updatedUrl = originalRequestUrl.newBuilder()
                     .addQueryParameter(API_KEY_PARAMETER, MoviesDatabaseService.API_KEY)

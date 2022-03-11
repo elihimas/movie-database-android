@@ -12,7 +12,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.view.children
 import com.elihimas.moviedatabase.R
 import com.elihimas.moviedatabase.databinding.ActivitySearchBinding
-import com.elihimas.moviedatabase.ui.fragments.MoviesListFragment
+import com.elihimas.moviedatabase.ui.fragments.SearchMoviesFragment
 import com.jakewharton.rxbinding.support.v7.widget.RxSearchView
 import rx.android.schedulers.AndroidSchedulers
 import java.util.concurrent.TimeUnit
@@ -36,7 +36,7 @@ class SearchActivity : AppCompatActivity() {
 
     private fun performSearch(query: String) {
         val searchFragment =
-            supportFragmentManager.findFragmentById(R.id.searchFragment) as MoviesListFragment
+            supportFragmentManager.findFragmentById(R.id.searchFragment) as SearchMoviesFragment
         searchFragment.searchMovies(query)
     }
 
