@@ -14,6 +14,6 @@ A simple Android app that displays movies from The Movie Database API. Currently
 - [Retrofit2](https://github.com/square/retrofit)
 - [Glide](https://bumptech.github.io/glide/)
 - [Jetpack paging](https://developer.android.com/topic/libraries/architecture/paging)
-- [Dagger](https://github.com/google/dagger)
+- [Koin](https://insert-koin.io/)
 - [Espresso](https://developer.android.com/training/testing/espresso)
 - [Mockito](https://site.mockito.org)

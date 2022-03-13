@@ -10,6 +10,7 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.elihimas.moviedatabase.apis.APIFactory
 import com.elihimas.moviedatabase.apis.LoadItemsCallbacks
+import com.elihimas.moviedatabase.apis.MoviesDatabaseService
 import com.elihimas.moviedatabase.model.Genre
 import com.elihimas.moviedatabase.model.Movie
 import com.elihimas.moviedatabase.paging.MoviesPagingSource
@@ -21,13 +22,12 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import com.elihimas.moviedatabase.isValidQuery
 
-class MoviesListViewModel : ViewModel(), LoadItemsCallbacks {
+class MoviesListViewModel(private val moviesDatabaseService: MoviesDatabaseService) : ViewModel(),
+    LoadItemsCallbacks {
 
     private val currentState = MutableLiveData<MoviesListState>()
 
     private var searchQuery: String? = null
-
-    private val moviesDatabaseService = APIFactory.createMoviesDatabaseService()
 
     private val compositeDisposable = CompositeDisposable()
 

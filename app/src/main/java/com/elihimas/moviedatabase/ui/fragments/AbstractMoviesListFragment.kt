@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import com.elihimas.moviedatabase.adapters.MoviesAdapter
@@ -12,11 +11,12 @@ import com.elihimas.moviedatabase.databinding.FragmentMoviesListBinding
 import com.elihimas.moviedatabase.model.Movie
 import com.elihimas.moviedatabase.viewmodels.MoviesListViewModel
 import com.elihimas.moviedatabase.viewmodels.states.MoviesListState
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 abstract class AbstractMoviesListFragment : BaseFragment() {
 
     private lateinit var binding: FragmentMoviesListBinding
-    protected val viewModel by viewModels<MoviesListViewModel>()
+    protected val viewModel by viewModel<MoviesListViewModel>()
 
     private val moviesAdapter by lazy { MoviesAdapter() }
 

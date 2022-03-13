@@ -15,7 +15,7 @@ import com.elihimas.moviedatabase.viewmodels.MoviesListViewModel
 import com.elihimas.moviedatabase.viewmodels.states.MoviesListState
 import kotlinx.coroutines.launch
 
-class MoviesListFragment(val genre: Genre) : AbstractMoviesListFragment() {
+class MoviesListFragment(private val genre: Genre) : AbstractMoviesListFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
