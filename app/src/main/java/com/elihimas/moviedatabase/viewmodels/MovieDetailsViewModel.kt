@@ -15,15 +15,17 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MovieDetailsViewModel(private val moviesDatabaseService: MoviesDatabaseService) : ViewModel() {
+class MovieDetailsViewModel(private val moviesDatabaseService: MoviesDatabaseService) :
+    ViewModel() {
 
-    private val currentState = MutableLiveData<MovieDetailsState>(MovieDetailsState.LoadingState)
+    private val currentState = MutableLiveData<MovieDetailsState>()
 
     private val compositeDisposable = CompositeDisposable()
 
     fun currentState(): LiveData<MovieDetailsState> = currentState
 
     fun loadMovie(movieId: Long) {
+        currentState.postValue(MovieDetailsState.LoadingState)
         addDisposable(
             moviesDatabaseService.getMovieDetails(movieId)
                 .subscribeOn(Schedulers.io())

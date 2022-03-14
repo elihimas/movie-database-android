@@ -5,8 +5,14 @@ import com.elihimas.moviedatabase.model.Movie
 
 sealed class MoviesListState {
     object NothingFound : MoviesListState()
-    data class MoviesLoadedState(val moviesPageData: PagingData<Movie>) : MoviesListState()
-
+    class MoviesLoadedState(val moviesPagingData: PagingData<Movie>) : MoviesListState() {
+        override fun equals(other: Any?): Boolean {
+            if (other is MoviesLoadedState) {
+                return moviesPagingData == other.moviesPagingData
+            }
+            return super.equals(other)
+        }
+    }
 
 
     object LoadingState : MoviesListState()

@@ -11,9 +11,9 @@ A simple Android app that displays movies from The Movie Database API. Currently
 
 ### Technologies used: ###
 - [RxAndroid](https://github.com/ReactiveX/RxAndroid)
-- [Retrofit2](https://github.com/square/retrofit)
+- [Retrofit](https://github.com/square/retrofit)
 - [Glide](https://bumptech.github.io/glide/)
 - [Jetpack paging](https://developer.android.com/topic/libraries/architecture/paging)
 - [Koin](https://insert-koin.io/)
 - [Espresso](https://developer.android.com/training/testing/espresso)
-- [Mockito](https://site.mockito.org)
+- [Mockk](https://mockk.io/)

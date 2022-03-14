@@ -4,10 +4,11 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.elihimas.moviedatabase.apis.MoviesDatabaseService
 import com.elihimas.moviedatabase.model.Movie
+import com.elihimas.moviedatabase.repository.MoviesRepository
 
 class SearchMoviesPagingSource(
     private val query: String,
-    private val service: MoviesDatabaseService
+    private val moviesDatabaseService: MoviesDatabaseService
 ) :
     PagingSource<Long, Movie>() {
 
@@ -28,7 +29,7 @@ class SearchMoviesPagingSource(
             )
         }
 
-        val moviesResponse = service.searchMovies(query, page)
+        val moviesResponse = moviesDatabaseService.searchMovies(query, page)
         val movies = moviesResponse.movies
         val previousPage: Long? = if (page > 0) {
             page - 1

@@ -2,6 +2,7 @@ package com.elihimas.moviedatabase
 
 import android.app.Application
 import com.elihimas.moviedatabase.apis.APIFactory
+import com.elihimas.moviedatabase.repository.MoviesRepository
 import com.elihimas.moviedatabase.viewmodels.MovieDetailsViewModel
 import com.elihimas.moviedatabase.viewmodels.MoviesListViewModel
 import org.koin.android.ext.koin.androidContext
@@ -13,6 +14,7 @@ import org.koin.dsl.module
 
 val moviesDatabaseApplicationAppModules = module {
     single { APIFactory.createMoviesDatabaseService() }
+    single { MoviesRepository(get()) }
 
     viewModel { MoviesListViewModel(get()) }
     viewModel { MovieDetailsViewModel(get()) }

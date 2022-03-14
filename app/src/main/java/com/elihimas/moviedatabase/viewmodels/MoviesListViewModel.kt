@@ -4,26 +4,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.elihimas.moviedatabase.apis.APIFactory
-import com.elihimas.moviedatabase.apis.LoadItemsCallbacks
-import com.elihimas.moviedatabase.apis.MoviesDatabaseService
+import com.elihimas.moviedatabase.isValidQuery
 import com.elihimas.moviedatabase.model.Genre
-import com.elihimas.moviedatabase.model.Movie
-import com.elihimas.moviedatabase.paging.MoviesPagingSource
-import com.elihimas.moviedatabase.paging.SearchMoviesPagingSource
+import com.elihimas.moviedatabase.repository.MoviesRepository
 import com.elihimas.moviedatabase.viewmodels.states.MoviesListState
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import com.elihimas.moviedatabase.isValidQuery
 
-class MoviesListViewModel(private val moviesDatabaseService: MoviesDatabaseService) : ViewModel(),
-    LoadItemsCallbacks {
+class MoviesListViewModel(private val repository: MoviesRepository) : ViewModel() {
 
     private val currentState = MutableLiveData<MoviesListState>()
 
@@ -40,18 +31,7 @@ class MoviesListViewModel(private val moviesDatabaseService: MoviesDatabaseServi
             currentState.postValue(MoviesListState.LoadingState)
 
             viewModelScope.launch {
-                Pager(
-                    config = PagingConfig(
-                        pageSize = 20,
-                        enablePlaceholders = false
-                    ),
-                    pagingSourceFactory = {
-                        SearchMoviesPagingSource(
-                            query,
-                            moviesDatabaseService
-                        )
-                    }
-                ).flow.cachedIn(viewModelScope).collectLatest {
+                repository.searchMovies(query).cachedIn(viewModelScope).collectLatest {
                     currentState.postValue(MoviesListState.MoviesLoadedState(it))
                 }
             }
@@ -64,18 +44,7 @@ class MoviesListViewModel(private val moviesDatabaseService: MoviesDatabaseServi
         currentState.postValue(MoviesListState.LoadingState)
 
         viewModelScope.launch {
-            Pager(
-                config = PagingConfig(
-                    pageSize = 20,
-                    enablePlaceholders = false
-                ),
-                pagingSourceFactory = {
-                    MoviesPagingSource(
-                        genre.getIdOnMoviesDatabase(),
-                        moviesDatabaseService
-                    )
-                }
-            ).flow.cachedIn(viewModelScope).collectLatest {
+            repository.loadGenreMovies(genre).cachedIn(viewModelScope).collectLatest {
                 currentState.postValue(MoviesListState.MoviesLoadedState(it))
             }
         }
@@ -83,15 +52,5 @@ class MoviesListViewModel(private val moviesDatabaseService: MoviesDatabaseServi
 
     private fun addDisposable(disposable: Disposable) {
         compositeDisposable.add(disposable)
-    }
-
-
-    override fun onNothingFound() {
-//        view?.showNothingFound()
-    }
-
-    override fun onError(cause: Throwable) {
-//        view?.hideLoading()
-//        view?.showError(cause)
     }
 }

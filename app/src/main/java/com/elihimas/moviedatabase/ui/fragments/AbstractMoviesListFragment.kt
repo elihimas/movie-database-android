@@ -53,7 +53,7 @@ abstract class AbstractMoviesListFragment : BaseFragment() {
             MoviesListState.NothingFound -> showNothingFound()
             MoviesListState.WaitingSearchState -> showWaitingSearchState()
             is MoviesListState.LoadErrorState -> showError(state.cause)
-            is MoviesListState.MoviesLoadedState -> showMovies(state.moviesPageData)
+            is MoviesListState.MoviesLoadedState -> showMovies(state.moviesPagingData)
         }
     }
 
