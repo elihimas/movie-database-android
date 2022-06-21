@@ -42,7 +42,7 @@ class MovieDetailsViewModelTest : BaseViewModelTest() {
     }
 
     @Test
-    fun `when load movie with invalid id then should `() {
+    fun `when load movie with invalid id then should result in error`() {
         val observer = mockk<Observer<MovieDetailsState>> {
             every { onChanged(any()) } just runs
         }
