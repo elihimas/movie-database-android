@@ -31,9 +31,11 @@ class MoviesListViewModel(private val repository: MoviesRepository) : ViewModel(
             currentState.postValue(MoviesListState.LoadingState)
 
             viewModelScope.launch {
-                repository.searchMovies(query).cachedIn(viewModelScope).collectLatest {
-                    currentState.postValue(MoviesListState.MoviesLoadedState(it))
-                }
+                repository.searchMovies(query).cachedIn(viewModelScope)
+                    .collectLatest { pagingData ->
+                        if(pagingData.)
+                        currentState.postValue(MoviesListState.MoviesLoadedState(pagingData))
+                    }
             }
         } else {
             currentState.postValue(MoviesListState.WaitingSearchState)

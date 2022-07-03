@@ -14,14 +14,7 @@ interface MoviesDatabaseService {
     }
 
     @GET("discover/movie")
-    suspend fun listMoviesByGenre(
-        @Query("with_genres") genre: Int,
-        @Query("page") page: Long
-    ): MoviesListResponse
-
-
-    @GET("discover/movie")
-    fun listMoviesByGenre2(
+    fun listMoviesByGenre(
         @Query("with_genres") genre: Int,
         @Query("page") page: Long
     ): Single<MoviesListResponse>
